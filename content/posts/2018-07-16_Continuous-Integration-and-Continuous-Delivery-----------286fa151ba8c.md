@@ -4,6 +4,7 @@ description: >-
   Software Development  වලදි  ඔබට  ඇතිවිය  හැකි  බොහෝමයක්  ගැටළු  මඟහරවාගන්න 
   ක්‍රමයක්  තමා  CI/CD  කියන්නෙ.
 date: '2018-07-16T16:00:17.646Z'
+draft: true
 categories: []
 keywords: []
 slug: >-

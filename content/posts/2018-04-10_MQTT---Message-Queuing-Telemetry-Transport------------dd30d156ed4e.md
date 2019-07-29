@@ -4,6 +4,7 @@ description: >-
   අද කතා කරන්න යන්නෙ තරමක් වෙනස් මාතෘකාවක් ගැන. අපි හැමෝම HTTP හෙවත් Hyper Text
   Transfer Protocol එක භාවිතා කරලා තියනවනෙ. මේ අවස්ථාවෙ ඔබ මේක…
 date: '2018-04-10T13:21:49.480Z'
+draft: true
 categories: []
 keywords: []
 slug: >-
