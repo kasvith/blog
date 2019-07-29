@@ -4,6 +4,8 @@ before_install:
 
 script:
   - pwd
+  - ls
+  - hugo version
   - hugo # This commands builds your website on travis
 
 deploy:
