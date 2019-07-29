@@ -1,3 +1,5 @@
+language: minimal
+
 before_install:
   - sudo snap install hugo --channel=extended
 
