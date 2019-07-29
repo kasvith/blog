@@ -94,7 +94,7 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
   linkToMarkDown = false    # Only effective when hugo will output .md files.           # 链接到markdown原始文件（仅当允许hugo生成markdown文件时有效）
   contentCopyright = ''     # e.g. '<a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a>'
 
-  googleVerification = ""  # Google Verification         # 谷歌
+  googleVerification = "WWrc_VbA0fevsERwTdmBSfiA2udWJ3vJSyfMiny5t00"  # Google Verification         # 谷歌
 
   # Link custom CSS and JS assets
   #   (relative to /static/css and /static/js respectively)
