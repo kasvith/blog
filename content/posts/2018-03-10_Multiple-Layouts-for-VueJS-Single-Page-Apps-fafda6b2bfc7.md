@@ -4,6 +4,7 @@ description: >-
   It is a common problem that even a Single Page App needs Multiple Layouts to
   display views. For example, a Login Page may not require…
 date: '2018-03-10T17:24:03.096Z'
+draft: true
 categories: []
 keywords: []
 slug: /@kasvith/multiple-layouts-for-vue-spa-app-fafda6b2bfc7

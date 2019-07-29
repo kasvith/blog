@@ -4,9 +4,9 @@ description: >-
   During my internship period at WSO2, Inc  I worked on a project to develop a 
   CI/CD pipeline for WSO2  API  Manager.  The tooling was…
 date: '2019-07-26T16:34:56.497Z'
-categories: []
-keywords: []
-slug: /@kasvith/how-i-embedded-resources-in-go-514b72f6ef0a
+comment: true
+categories: ["go", "golang", "generate"]
+keywords: ["go", "golang", "generate", "code-generation"]
 ---
 
 {{< figure class="align-center" src="/img/1__ig3iBEzTcnXV1ZGnj91__Dw.png" >}}
