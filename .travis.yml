@@ -3,6 +3,7 @@ before_install:
   - sudo apt-get install -y hugo
 
 script:
+  - pwd
   - hugo # This commands builds your website on travis
 
 deploy:
