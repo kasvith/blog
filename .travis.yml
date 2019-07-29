@@ -2,9 +2,6 @@ before_install:
   - sudo snap install hugo --channel=extended
 
 script:
-  - pwd
-  - ls
-  - hugo version
   - hugo # This commands builds your website on travis
 
 deploy:
