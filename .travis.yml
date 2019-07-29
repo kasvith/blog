@@ -1,0 +1,19 @@
+dist: xenial
+    addons:
+      snaps:
+        - hugo
+
+script:
+  - hugo # This commands builds your website on travis
+
+deploy:
+  local_dir: public
+  repo: kasvith/kasvith.github.io
+  target_branch: master
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  email: alankasun@gmail.com
+  name: "kasvith"
+  on:
+    branch: master
