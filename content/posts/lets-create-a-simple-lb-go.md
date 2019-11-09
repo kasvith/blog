@@ -395,7 +395,7 @@ Finally, run this in a separate goroutine.
 go healthCheck()
 ```
 
-## A little benchmark
+<!-- ## A little benchmark
 
 After implementing the load balancer, I tried benchmarking on my working machine. This may not be ideal as we
 want dedicated instances to do an actual load testing.
@@ -408,7 +408,7 @@ Test was carried out using Apache JMeter with 5000 concurrent users, 2 loops tot
 
 {{< figure class="align-center" src="/img/lets-create-a-load-balancer/bench-result.png" caption="JMeter test result(using CLI)" >}}
 
-We get around 700 Transactions per second for our simple load balancer, which is not bad at all.
+We get around 700 Transactions per second for our simple load balancer, which is not bad at all. -->
 
 ## Conclusion
 
