@@ -406,7 +406,7 @@ Test was carried out using Apache JMeter with 5000 concurrent users, 2 loops tot
 
 {{< figure class="align-center" src="/img/lets-create-a-load-balancer/bench-jmeter.png" caption="JMeter test setup" >}}
 
-{{< figure class="align-center" src="/img/lets-create-a-load-balancer/bench-result.png" caption="JMeter test result(using commandline)" >}}
+{{< figure class="align-center" src="/img/lets-create-a-load-balancer/bench-result.png" caption="JMeter test result(using CLI)" >}}
 
 We get around 700 Transactions per second for our simple load balancer, which is not bad at all.
 
