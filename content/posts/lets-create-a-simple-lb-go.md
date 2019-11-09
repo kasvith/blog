@@ -42,7 +42,7 @@ sequenceDiagrams:
 
 <!--article-->
 
-{{< figure class="align-center" src="/img/lets-create-a-load-balancer/banner.png" >}}
+{{< figure class="align-center" src="/img/lets-create-a-load-balancer/featured.png" >}}
 
 Load Balancers plays a key role in Web Architecture. They allow distributing load among a set of backends. This makes services more scalable.
 Also since there are multiple backends configured the service become highly available as load balancer can pick up a working server in case of a failure.
