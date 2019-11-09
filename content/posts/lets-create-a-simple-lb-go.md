@@ -389,7 +389,7 @@ func healthCheck() {
 
 In the above snippet, `<-t.C` channel will return a value per 20s. `select` allows to detect this event. `select` waits until at least one case statement could be executed if there is no `default` case.
 
-Finally, run this in a seperate goroutine.
+Finally, run this in a separate goroutine.
 
 ```go
 go healthCheck()
@@ -397,50 +397,18 @@ go healthCheck()
 
 ## A little benchmark
 
-After implementing the load balancer, I tried doing some benchmark in Google Cloud Console using
-3 docker containers with `strm/helloworld-http` image. I made the stress test using [Apache Benchmark](https://httpd.apache.org/docs/2.4/programs/ab.html) Tool.
+After implementing the load balancer, I tried benchmarking on my working machine. This may not be ideal as we
+want dedicated instances to do an actual load testing.
 
-```
-ab -n 1000 -c 100 http://localhost:3030/
- 
-Server Software:        SimpleHTTP/0.6
-Server Hostname:        localhost
-Server Port:            3030
- 
-Document Path:          /
-Document Length:        102 bytes
- 
-Concurrency Level:      100
-Time taken for tests:   7.713 seconds
-Complete requests:      1000
-Failed requests:        0
-Total transferred:      287000 bytes
-HTML transferred:       102000 bytes
-Requests per second:    129.66 [#/sec] (mean)
-Time per request:       771.264 [ms] (mean)
-Time per request:       7.713 [ms] (mean, across all concurrent requests)
-Transfer rate:          36.34 [Kbytes/sec] received
- 
-Connection Times (ms)
-              min  mean[+/-sd] median   max
-Connect:        0    1   3.4      0      28
-Processing:    17  367 862.8     85    7683
-Waiting:       16  367 862.8     85    7683
-Total:         22  368 864.4     87    7695
- 
-Percentage of the requests served within a certain time (ms)
-  50%     87
-  66%    116
-  75%    142
-  80%    160
-  90%   1155
-  95%   1413
-  98%   4433
-  99%   4442
- 100%   7695 (longest request)
-```
+My specs are Core i7, 16GiB Ram, Windows 10 Education.
 
-We get around 130req/s for our simple load balancer, which is not bad at all.
+Test was carried out using Apache JMeter with 5000 concurrent users, 2 loops total 10000 requests.
+
+{{< figure class="align-center" src="/img/lets-create-a-load-balancer/bench-jmeter.png" caption="JMeter test setup" >}}
+
+{{< figure class="align-center" src="/img/lets-create-a-load-balancer/bench-result.png" caption="JMeter test result(using commandline)" >}}
+
+We get around 700 Transactions per second for our simple load balancer, which is not bad at all.
 
 ## Conclusion
 
