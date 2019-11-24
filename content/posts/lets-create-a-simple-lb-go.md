@@ -373,7 +373,7 @@ func (s *ServerPool) HealthCheck() {
 To run this periodically we can start a timer in Go. Once a timer created it allows you to listen for the event using a channel.
 
 ```go
-// healthCheck runs a routine for check status of the backends every 2 mins
+// healthCheck runs a routine for check status of the backends every 20 secs
 func healthCheck() {
   t := time.NewTicker(time.Second * 20)
   for {
