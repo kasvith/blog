@@ -217,7 +217,7 @@ I must thank Keshara again for his effort during the UI development.
 
 These devices are sending data at high throughput. We decided to use separate VLAN for devices and another VLAN for the API to handle the traffic without flooding the Hospital Network. We also got help from our University Lecturers [Dr. Asitha Bandaranayake](http://www.ce.pdn.ac.lk/academic-staff/asitha-bandaranayake/) and [Dr. Suneth Namal Karunarathna](http://www.ce.pdn.ac.lk/academic-staff/suneth-namal-karunarathna/)
 
-With their support, we were able to set up a solid network. Next, we deployed an Ubuntu 18.04 box and started deploying the system.
+With their support, we were able to set up a solid network. Next, we started an Ubuntu 18.04 box and started deploying the system.
 
 Keshara did the heavy lifting in here also, risking his own life in a hospital with possible COVID Patients.
 
