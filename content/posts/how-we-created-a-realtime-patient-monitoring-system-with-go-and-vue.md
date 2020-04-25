@@ -175,7 +175,7 @@ func (d *Device) ProcessHL7Packet() (hl7.Message, error) {
 
 The system design was done in a way its reliable for the long run. We carefully selected the best tools for the task.
 
-The database we selected was PostgreSQL because it was stable and reliable. With HA setup we can create a good reliable database system for the monitoring system.
+The database we selected was **PostgreSQL** because it was stable and reliable. With HA setup we can create a good reliable database system for the monitoring system.
 Also, PG supports high throughput data ingestion as well, it was a plus.
 
 In future with **TimeScaleDB**, we gonna make this for _realtime analytics_ as well. So PG was the best overall selection as TimeScale can be installed on top of it in future.
