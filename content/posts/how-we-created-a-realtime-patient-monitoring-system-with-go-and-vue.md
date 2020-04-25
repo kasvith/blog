@@ -54,7 +54,7 @@ we will find some cure soon.
 
 {{< figure class="align-center" src="/img/covid19-rpms-go-vue/corona-virus.jpg" caption="Corona Virus" >}}
 
-## Covid-19 attacks Sri Lanka
+## Covid-19 attacked Sri Lanka
 
 Due to the nature of the virus, it was very hard to stop it from spreading.
 In Sri Lanka, where I live we faced the same situation.
