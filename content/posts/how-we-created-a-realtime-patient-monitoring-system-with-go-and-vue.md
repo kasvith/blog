@@ -44,7 +44,7 @@ sequenceDiagrams:
   options: ""
 ---
 
-{{< figure class="align-center" src="/img/covid19-rpms-go-vue/banner.png" >}}
+{{< figure class="align-center" src="/img/covid19-rpms-go-vue/featured.png" >}}
 
 ## A Pandemic started
 
