@@ -57,8 +57,6 @@ we will find some cure soon.
 ## Covid-19 attacked Sri Lanka
 
 Due to the nature of the virus, it was very hard to stop it from spreading.
-In Sri Lanka, where I live we faced the same situation.
-Due to the nature of the virus, it was very hard to stop it from spreading.
 In Sri Lanka, where I live we faced the same situation as everyone else.
 And here we talk about how we helped our frontline in the battle by doing a small favour
 
