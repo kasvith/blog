@@ -1,7 +1,7 @@
 ---
 title: "How We Created a Realtime Patient Monitoring System With Go and Vue in 3 days"
 date: 2020-04-25T00:55:56+05:30
-draft: true
+draft: false
 keywords:
   [
     "go",
