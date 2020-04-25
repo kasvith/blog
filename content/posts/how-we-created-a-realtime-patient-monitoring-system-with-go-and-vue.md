@@ -121,7 +121,7 @@ Vuetify for a UI library
 
 ## We got a real device
 
-After playing with programmer guides for Mindray Bedside Monitor(it was common in the hospital, so we picked it up) we made a small prototype to decode hl7 messages. It could correctly decode hl7 messages and convert data to JSON correctly. We made this using Unsolisticated Result Interface defined in the Programmer Manual.
+After playing with [programmer guide for Mindray](https://www.mindraynorthamerica.com/cmsAdmin/uploads/h-046-004990-00-1-0_a-series-communication-protocol-interface-guide_003.pdf) Bedside Monitor(it was common in the hospital, so we picked it up) we made a small prototype to decode hl7 messages. It could correctly decode hl7 messages and convert data to JSON correctly. We made this using Unsolisticated Result Interface defined in the Programmer Manual.
 
 {{< figure class="align-center" src="/img/covid19-rpms-go-vue/mindray-bedside-monitor.png" caption="Mindray uMec10" >}}
 
