@@ -246,3 +246,15 @@ Using **Golang** was a brillient idea, we wrote a pretty stable system within fe
 Also **VueJS** helped us to create truely reactive nice UIs quickly.
 
 Together We Can :heart:
+
+## Disclaimer
+
+We created this software on a request from healthcare staffs. It is not a commercial application.
+Even with this system, we strongly suggest doctors to visit their patients, take real measurements.
+
+As this software was developed fast due to prevailing pandemic situation, we released it with the most urgent feature **monitoring**.
+We tested this for long run, with multiple devices as well. So far it worked out well.
+
+It does not indicate this is perfect, we are working on improvements and fixing bugs until its very stable.
+
+Thus we have adviced doctors to use this with **CAUTION**
