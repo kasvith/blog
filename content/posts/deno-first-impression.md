@@ -5,7 +5,7 @@ lastmod: 2020-05-14T16:13:29+05:30
 draft: false
 keywords: ["deno", "typescript", "ts", "javascript", "js", "es6"]
 description: >-
-  Deno is a new secure runtime for javascript and typescript created by Ryan Dhal, original author of NodeJS. Recently Deno 1.0.0 was released
+  Deno is a new secure runtime for javascript and typescript created by Ryan Dhal, the original author of NodeJS. Recently Deno 1.0.0 was released
   and this is my first impression about it
 tags: ["deno", "typescript", "ts", "javascript", "js", "es6"]
 categories: ["deno", "typescript"]
@@ -45,7 +45,7 @@ sequenceDiagrams:
 <!--article-->
 {{< figure class="align-center" src="/img/deno-first-impression/featured.png" >}}
 
-Deno is a new secure runtime for javascript and typescript created by Ryan Dhal, original author of NodeJS. Recently Deno 1.0.0 was released
+Deno is a new secure runtime for javascript and typescript created by Ryan Dhal, the original author of NodeJS. Recently Deno 1.0.0 was released
 and this is my first impression about it.
 
 ## Meet Deno
