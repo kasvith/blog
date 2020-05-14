@@ -4,7 +4,9 @@ date: 2020-05-14T16:13:29+05:30
 lastmod: 2020-05-14T16:13:29+05:30
 draft: false
 keywords: ["deno", "typescript", "ts", "javascript", "js", "es6"]
-description: ""
+description: >-
+  Deno is a new secure runtime for javascript and typescript created by Ryan Dhal, original author of NodeJS. Recently Deno 1.0.0 was released
+  and this is my first impression about it
 tags: ["deno", "typescript", "ts", "javascript", "js", "es6"]
 categories: ["deno", "typescript"]
 author: "Kasun Vithanage"
@@ -40,8 +42,11 @@ sequenceDiagrams:
 
 ---
 
-<!--more-->
+<!--article-->
 {{< figure class="align-center" src="/img/deno-first-impression/featured.png" >}}
+
+Deno is a new secure runtime for javascript and typescript created by Ryan Dhal, original author of NodeJS. Recently Deno 1.0.0 was released
+and this is my first impression about it.
 
 ## Meet Deno
 
@@ -159,6 +164,12 @@ Check if it's installed by executing `deno` in your shell. It should be like thi
 
 ### Getting lines from Stdin
 
+Our simple grep command will be executed like
+
+```bash
+cat file.txt | deno run sgrep.ts --colors=true needle
+```
+
 Create a file in your working directory called `sgrep.ts`
 
 For a grep utility, we need to take input from the standard input.
@@ -188,4 +199,264 @@ You will see something like below. Now try typing some words and check them echo
 
 {{< figure class="align-center" src="/img/deno-first-impression/read-stdin.png" caption="Reading stdin and echo" >}}
 
-### 
+### Parse arguments
+
+Deno provides a simple method to get arguments anywhere. Use `Deno.args` will provide you with an array with the arguments passed after your file name
+
+```bash
+deno run file.ts --flag=1 anything after this
+```
+
+So `Deno.args` will return you an array with,
+
+```typescript
+["anything", "after", "this", "--flag=1"]
+```
+
+Now to process flags, like `--colors=true` Deno provides a standard library module called `flags`
+
+```typescript
+import { parse, Args } from "https://deno.land/std/flags/mod.ts";
+
+const flags: Args = parse(Deno.args);
+```
+
+Now `flags._` will contain anything other than a flag. In the above case `["anything", "after", "this"]`.
+
+we can check for flag value like
+
+```typescript
+  if (flags["colors"] === "true") {
+    // do something
+  }
+```
+
+So for our example, we need exactly one non-flag argument and need to check if colours enabled.
+
+```typescript
+if (flags._.length !== 1) {
+  Deno.exit(1);
+}
+
+if (flags["colors"] === "true") {
+  // output colors
+}
+
+// read the first non-flag argument as needle
+const needle: string = flags._[0] as string;
+```
+
+### Showing grep output
+
+To output, we can use `string.includes` like this
+
+```typescript
+for await (const line of bufio.readLines(Deno.stdin)) {
+  if (line.includes(needle)) {
+    console.log(line);
+  }
+}
+```
+
+For colour output, deno also provides `colors` module. 
+
+```typescript
+import * as colors from "https://deno.land/std/fmt/colors.ts";
+```
+
+Try running 
+
+```typescript
+console.log(colors.red("hey this is red"));
+```
+
+If your terminal supports, it will show red colour text like below.
+
+{{< figure class="align-center" src="/img/deno-first-impression/color-output.png" caption="Color output" >}}
+
+Now to highlight any text with the matching `needle` we can simply use a `RegEx` as below
+
+```typescript
+console.log(
+    line.replace(RegExp(escapeRegExp(needle), "g"), colors.red(needle)),
+ );
+```
+
+`escapeRegExp` is used to escape the regular expression syntax as described in [MDN Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#Escaping)
+
+```typescript
+function escapeRegExp(string) {
+  return string.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+}
+```
+
+### Connecting dots
+
+Now final piece in the puzzle is to connect these dots.
+
+We already know how to output colour and in normal mode. But doing this by checking for `--colors` in the for loop is not good. 
+
+Let's define our functions to print colour and normal
+
+```typescript
+function normalOutput(needle: string, line: string): void {
+  console.log(line);
+}
+
+function colorOutput(needle: string, line: string): void {
+  console.log(
+    line.replace(RegExp(escapeRegExp(needle), "g"), colors.red(needle)),
+  );
+}
+```
+
+Both functions have the signature of `(string, string) => void`. So we can simply call them using a function callback type in `typescript`(a function pointer if you familiar with C/C++)
+
+```typescript
+let outputFn: (n: string, s: string) => void = normalOutput;
+```
+
+Now we only need to change this to `colorOutput` if the flag is enabled.
+
+```typescript
+if (flags["colors"] === "true") {
+  outputFn = colorOutput;
+}
+```
+
+and finally in the loop
+
+```typescript
+for await (const line of bufio.readLines(Deno.stdin)) {
+  if (line.includes(needle)) {
+    outputFn(needle, line);
+  }
+}
+```
+
+### Running only in main module
+
+Most programming languages allow you to have a main entry point for the program.
+
+For example in go,
+
+```go
+func main() {
+  // application logic goes here
+}
+```
+
+But with Node we did not have this. 
+
+Deno solves this issue as well providing you with a way to distinguish the main module from other.
+
+```typescript
+if (import.meta.main) {
+  // run main app logic
+}
+```
+
+So our program needs same, final program looks like belowMost programming languages allow you to have a main entry point for the program.
+
+For example in go,
+
+```go
+func main() {
+  // application logic goes here
+}
+```
+
+But with Node we did not have this.
+
+Deno solves this issue as well providing you with a way to distinguish the main module from other.
+
+```typescript
+if (import.meta.main) {
+  // run main app logic
+}
+```
+
+Let's refactor our program like below
+
+### Final Code
+
+```typescript
+import * as colors from "https://deno.land/std/fmt/colors.ts";
+import * as bufio from "https://deno.land/std/io/bufio.ts";
+import { parse, Args } from "https://deno.land/std/flags/mod.ts";
+
+function printUsage() {
+  console.log("usage:");
+  console.log("\tdeno sgrep.ts [--colors] needle");
+}
+
+function normalOutput(needle: string, line: string): void {
+  console.log(line);
+}
+
+function escapeRegExp(s: string) {
+  return s.replace(/[.*+\-?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
+}
+
+function colorOutput(needle: string, line: string): void {
+  console.log(
+    line.replace(RegExp(escapeRegExp(needle), "g"), colors.red(needle)),
+  );
+}
+
+async function run(): Promise<void> {
+  let outputFn: (n: string, s: string) => void = normalOutput;
+
+  const flags: Args = parse(Deno.args);
+
+  if (flags._.length !== 1) {
+    printUsage();
+    Deno.exit(1);
+  }
+
+  if (flags["colors"] === "true") {
+    outputFn = colorOutput;
+  }
+
+  const needle: string = flags._[0] as string;
+  for await (const line of bufio.readLines(Deno.stdin)) {
+    if (line.includes(needle)) {
+      outputFn(needle, line);
+    }
+  }
+}
+
+if (import.meta.main) {
+  await run();
+}
+```
+
+### Testing our sgrep
+
+So when we run our program, we need `cat` to pipe out input to `sgrep`.
+
+```bash
+cat file.txt | deno run sgrep.ts who
+```
+
+{{< figure class="align-center" src="/img/deno-first-impression/output-nocolor.png" caption="sgrep output without colors" >}}
+
+```bash
+cat file.txt | deno run sgrep.ts --colors=true who
+```
+
+{{< figure class="align-center" src="/img/deno-first-impression/output-color.png" caption="sgrep output with colors" >}}
+
+Now we have created a small nice grep utility with deno. Hooray. :muscle:
+
+You can find full code [here](https://github.com/kasvith/sgrep).
+
+## Wrap up
+
+Deno will change the future of Javascript and Typescript. It's still young, released v1.0.0 in 2020-05-13. But you now see its potential. The power brings down you with `Typescript` and other cool features. Rest is up to your imagination.
+
+Visit [deno.land](https://deno.land) today and start exploring this amazing world.
+
+We should thank Ryan Dhal and other contributors for creating this amazing runtime.
+
+Let's deno :fire:
