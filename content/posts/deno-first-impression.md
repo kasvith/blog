@@ -133,7 +133,7 @@ Deno allows you the same. If you can put your code somewhere on the internet(for
 For example,
 
 ```typescript
-import * as colors from "https://deno.land/std/fmt/colors.ts";
+import * as colors from "https://deno.land/std@0.50.0/fmt/colors.ts";
 ```
 
 ES6 style imports directly over HTTP.
@@ -178,13 +178,13 @@ Deno provides `Deno.stdin` in the global namespace so we can use it directly to 
 To read line by line, we can use `bufio` module provided by deno standard library. 
 
 ```typescript
-import * as bufio from "https://deno.land/std/io/bufio.ts";
+import * as bufio from "https://deno.land/std@0.50.0/io/bufio.ts";
 ```
 
 Now we can use `bufio.readLines()` to read. This returns an `AsynIterator` thus we can simply use our favourite `await` keyword
 
 ```typescript
-import * as bufio from "https://deno.land/std/io/bufio.ts";
+import * as bufio from "https://deno.land/std@0.50.0/io/bufio.ts";
 
 for await (const line of bufio.readLines(Deno.stdin)) {
   console.log(line);
@@ -216,7 +216,7 @@ So `Deno.args` will return you an array with,
 Now to process flags, like `--colors=true` Deno provides a standard library module called `flags`
 
 ```typescript
-import { parse, Args } from "https://deno.land/std/flags/mod.ts";
+import { parse, Args } from "https://deno.land/std@0.50.0/flags/mod.ts";
 
 const flags: Args = parse(Deno.args);
 ```
@@ -261,7 +261,7 @@ for await (const line of bufio.readLines(Deno.stdin)) {
 For colour output, deno also provides `colors` module. 
 
 ```typescript
-import * as colors from "https://deno.land/std/fmt/colors.ts";
+import * as colors from "https://deno.land/std@0.50.0/fmt/colors.ts";
 ```
 
 Try running 
@@ -363,9 +363,9 @@ Let's refactor our program like below
 ### Final Code
 
 ```typescript
-import * as colors from "https://deno.land/std/fmt/colors.ts";
-import * as bufio from "https://deno.land/std/io/bufio.ts";
-import { parse, Args } from "https://deno.land/std/flags/mod.ts";
+import * as colors from "https://deno.land/std@0.50.0/fmt/colors.ts";
+import * as bufio from "https://deno.land/std@0.50.0/io/bufio.ts";
+import { parse, Args } from "https://deno.land/std@0.50.0/flags/mod.ts";
 
 function printUsage() {
   console.log("usage:");
