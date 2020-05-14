@@ -117,4 +117,45 @@ But the API is not compatible for NodeJS. But there are plans to bring existing 
 
 Checkout standard library [here](https://deno.land/std)
 
-### No NPM
+### No NPM :zap:
+
+Node's eco-system is built around NPM. A centralized package management system. So if you want to publish a package you have to go through a process to let others use it.
+
+Golang took a radical approach to use a decentralized module system. With Go, packages can be loaded directly from a Version Control system easily. No painful process involved.
+
+Deno allows you the same. If you can put your code somewhere on the internet(for example GitHub), you can pull it directly to your application
+
+For example,
+
+```typescript
+import * as colors from "https://deno.land/std/fmt/colors.ts";
+```
+
+ES6 style imports directly over HTTP.
+
+Don't worry, Deno knows to cache them. So you won't download it again.
+
+Also, [Third party packages](https://deno.land/x) can be submitted here to display nicely.
+
+### Browser like API :ok_hand:
+
+Deno tries to stay as much as compatible with the browser. You can also have a `window` object like in a browser.
+
+For example,
+famous `fetch` is available on deno as well.
+
+```typescript
+const res = await fetch(url);
+```
+
+## Creating a simple grep command in Deno
+
+### Install Deno
+
+Follow the installation [guide](https://deno.land/manual/getting_started/installation) to get started with Deno. 
+Check if it's installed by executing `deno` in your shell. It should be like this
+
+{{< figure class="align-center" src="/img/deno-first-impression/deno-shell.png" caption="Deno shell" >}}
+
+
+### 
