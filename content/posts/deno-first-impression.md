@@ -5,7 +5,7 @@ lastmod: 2020-05-14T16:13:29+05:30
 draft: false
 keywords: ["deno", "typescript", "ts", "javascript", "js", "es6"]
 description: >-
-  Deno is a new secure runtime for javascript and typescript created by Ryan Dhal, the original author of NodeJS. Recently Deno 1.0.0 was released
+  Deno is a new secure runtime for javascript and typescript created by Ryan Dahl, the original author of NodeJS. Recently Deno 1.0.0 was released
   and this is my first impression about it
 tags: ["deno", "typescript", "ts", "javascript", "js", "es6"]
 categories: ["deno", "typescript"]
@@ -45,13 +45,13 @@ sequenceDiagrams:
 <!--article-->
 {{< figure class="align-center" src="/img/deno-first-impression/featured.png" >}}
 
-Deno is a new secure runtime for javascript and typescript created by Ryan Dhal, the original author of NodeJS. Recently Deno 1.0.0 was released
+Deno is a new secure runtime for javascript and typescript created by Ryan Dahl, the original author of NodeJS. Recently Deno 1.0.0 was released
 and this is my first impression about it.
 
 ## Meet Deno
 
 [Deno](https://deno.land) is a new **secure** `Typescript` and `Javascript` runtime. Yes similar to our loving **NodeJS**.
-Deno was created by **Ryan Dhal** the original author of **NodeJS**.
+Deno was created by **Ryan Dahl** the original author of **NodeJS**.
 
 Deno is written in Rust, Tokio and Typescript using V8 under the hood.
 
@@ -116,7 +116,7 @@ Deno provides a well written standard library. This allows writing programs as y
 
 But the API is not compatible for NodeJS. But there are plans to bring existing large Node package base to Deno easily.
 
-Checkout standard library [here](https://deno.land/std)Deno provides a well written standard library. This allows writing programs as you do in a language like Golang. Provides much stuff out of the box so it's up to your imagination.
+Checkout standard library [here](https://deno.land/std). Deno provides a well written standard library. This allows writing programs as you do in a language like Golang. Provides much stuff out of the box so it's up to your imagination.
 
 But the API is not compatible for NodeJS. But there are plans to bring existing large Node package base to Deno easily.
 
@@ -356,25 +356,7 @@ if (import.meta.main) {
 }
 ```
 
-So our program needs same, final program looks like belowMost programming languages allow you to have a main entry point for the program.
-
-For example in go,
-
-```go
-func main() {
-  // application logic goes here
-}
-```
-
-But with Node we did not have this.
-
-Deno solves this issue as well providing you with a way to distinguish the main module from other.
-
-```typescript
-if (import.meta.main) {
-  // run main app logic
-}
-```
+So our program needs same.
 
 Let's refactor our program like below
 
@@ -457,6 +439,6 @@ Deno will change the future of Javascript and Typescript. It's still young, rele
 
 Visit [deno.land](https://deno.land) today and start exploring this amazing world.
 
-We should thank Ryan Dhal and other contributors for creating this amazing runtime.
+We should thank Ryan Dahl and other contributors for creating this amazing runtime.
 
 Let's deno :fire:
