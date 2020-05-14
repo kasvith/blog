@@ -116,11 +116,7 @@ Deno provides a well written standard library. This allows writing programs as y
 
 But the API is not compatible for NodeJS. But there are plans to bring existing large Node package base to Deno easily.
 
-Checkout standard library [here](https://deno.land/std). Deno provides a well written standard library. This allows writing programs as you do in a language like Golang. Provides much stuff out of the box so it's up to your imagination.
-
-But the API is not compatible for NodeJS. But there are plans to bring existing large Node package base to Deno easily.
-
-Checkout standard library [here](https://deno.land/std)
+Checkout standard library [here](https://deno.land/std).
 
 ### No NPM :zap:
 
