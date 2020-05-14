@@ -2,7 +2,7 @@
 title: "Deno - first impression"
 date: 2020-05-14T16:13:29+05:30
 lastmod: 2020-05-14T16:13:29+05:30
-draft: true
+draft: false
 keywords: ["deno", "typescript", "ts", "javascript", "js", "es6"]
 description: ""
 tags: ["deno", "typescript", "ts", "javascript", "js", "es6"]
@@ -157,5 +157,35 @@ Check if it's installed by executing `deno` in your shell. It should be like thi
 
 {{< figure class="align-center" src="/img/deno-first-impression/deno-shell.png" caption="Deno shell" >}}
 
+### Getting lines from Stdin
+
+Create a file in your working directory called `sgrep.ts`
+
+For a grep utility, we need to take input from the standard input.
+Deno provides `Deno.stdin` in the global namespace so we can use it directly to access the `stdin` as we do in any programming language.
+
+To read line by line, we can use `bufio` module provided by deno standard library. 
+
+```typescript
+import * as bufio from "https://deno.land/std/io/bufio.ts";
+```
+
+Now we can use `bufio.readLines()` to read. This returns an `AsynIterator` thus we can simply use our favourite `await` keyword
+
+```typescript
+import * as bufio from "https://deno.land/std/io/bufio.ts";
+
+for await (const line of bufio.readLines(Deno.stdin)) {
+  console.log(line);
+}
+```
+
+Deno allows you to use `await` top level without wrapping it in a `async` function.
+
+Now run this with `deno run sgrep.ts`
+
+You will see something like below. Now try typing some words and check them echo back.
+
+{{< figure class="align-center" src="/img/deno-first-impression/read-stdin.png" caption="Reading stdin and echo" >}}
 
 ### 
