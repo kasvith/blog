@@ -23,7 +23,7 @@ module.exports = {
   ],
 
   templates: {
-    Post: "/posts/:title",
+    Post: "/posts/:fileInfo__name",
     Tag: "/tags/:id",
   },
 
