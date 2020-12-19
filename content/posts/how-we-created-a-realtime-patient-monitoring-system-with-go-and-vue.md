@@ -12,39 +12,10 @@ keywords:
     "remote-monitoring",
     "hospital",
   ]
-categories: ["go", "covid19", "vue"]
+tags: ["go", "covid19", "vue"]
 author: "Kasun Vithanage"
-# You can also close(false) or open(true) something for this content.
-# P.S. comment can only be closed
-comment: true
-toc: true
-autoCollapseToc: false
-postMetaInFooter: false
-hiddenFromHomePage: false
-# You can also define another contentCopyright. e.g. contentCopyright: "This is another copyright."
-contentCopyright: false
-reward: false
-mathjax: false
-mathjaxEnableSingleDollar: false
-mathjaxEnableAutoNumber: false
-
-# You unlisted posts you might want not want the header or footer to show
-hideHeaderAndFooter: false
-
-# You can enable or disable out-of-date content warning for individual post.
-# Comment this out to use the global config.
-#enableOutdatedInfoWarning: false
-
-flowchartDiagrams:
-  enable: false
-  options: ""
-
-sequenceDiagrams:
-  enable: false
-  options: ""
+cover_image: ./images/covid19-rpms-go-vue/featured.png
 ---
-
-{{< figure class="align-center" src="/img/covid19-rpms-go-vue/featured.png" >}}
 
 ## A Pandemic started
 
@@ -52,7 +23,7 @@ In the last November in 2019, we heard about the first case of unknown deadly di
 Now it seems to change our lives forever. The virus is deadly and it is highly contagious. Still, we know very little about it. I truly hope
 we will find some cure soon.
 
-{{< figure class="align-center" src="/img/covid19-rpms-go-vue/corona-virus.jpg" caption="Corona Virus" >}}
+![Corona Virus](./images/covid19-rpms-go-vue/corona-virus.jpg)
 
 ## Covid-19 attacked Sri Lanka
 
@@ -76,13 +47,13 @@ We studied the HL7 protocol for a while. It was bit weird. We have never worked 
 
 HL7 messages are framed as below
 
-{{< figure class="align-center" src="/img/covid19-rpms-go-vue/hl7.png" caption="HL7 Packet" >}}
+![HL7 Packet](./images/covid19-rpms-go-vue/hl7.png)
 
 Inside the message section patient medical data is packed like below, `<CR>` is `\r` carrige return used to seperate messages
 
 **Sample HL7 Message**
 
-```hl7
+```
 MSH|^~\&|||||||ORU^R01|103|P|2.3.1|<CR>
 PID|||14140f00-7bbc-0478-11122d2d02000000||WEERASINGHE^KESHARA||19960714|M|<CR>
 PV1||I|^^ICU&1&3232237756&4601&&1|||||||||||||||A|||<CR>
@@ -123,7 +94,7 @@ Vuetify for a UI library
 
 After playing with [programmer guide for Mindray](https://www.mindraynorthamerica.com/cmsAdmin/uploads/h-046-004990-00-1-0_a-series-communication-protocol-interface-guide_003.pdf) Bedside Monitor(it was common in the hospital, so we picked it up) we made a small prototype to decode hl7 messages. It could correctly decode hl7 messages and convert data to JSON correctly. We made this using Unsolisticated Result Interface defined in the Programmer Manual.
 
-{{< figure class="align-center" src="/img/covid19-rpms-go-vue/mindray-bedside-monitor.png" caption="Mindray uMec10" >}}
+![Mindray uMec10](./images/covid19-rpms-go-vue/mindray-bedside-monitor.png)
 
 But when we got hands-on a real device it really did not work. So Keshara and I started analyzing packets in Wireshark to see what device is actually doing. So we find out that it is not talking this protocol at all. Its using Realtime Result Interface which was quite old and out of maintenance by manufacturer.
 
@@ -171,7 +142,7 @@ func (d *Device) ProcessHL7Packet() (hl7.Message, error) {
 
 ## System Architecture
 
-{{< figure class="align-center" src="/img/covid19-rpms-go-vue/architecture.png" caption="System Architecture" >}}
+![System Architecture](./images/covid19-rpms-go-vue/architecture.png)
 
 The system design was done in a way its reliable for the long run. We carefully selected the best tools for the task.
 
@@ -189,7 +160,7 @@ Bedside monitor broadcasted its existence via UDP protocol. We had to capture th
 We created a separate Go Service to detect the UDP broadcasts and register a new device within the system.
 Next phase was to connect the Data Server inside the device from the Gateway. We created another service in Go to handle these TCP connections.
 
-{{< figure class="align-center" src="/img/covid19-rpms-go-vue/discovery.png" caption="Device Discovery" >}}
+![Device Discovery](./images/covid19-rpms-go-vue/discovery.png)
 
 As our gateway need to connect as a client to the device, we had to coordinate the client disconnections as well. Also, we had to keep tabs on each monitor status in the gateway too.
 
@@ -211,7 +182,7 @@ We connected API and Frontend using [Socket.io](https://socket.io/), which allow
 
 I must thank Keshara again for his effort during the UI development.
 
-{{< figure class="align-center" src="/img/covid19-rpms-go-vue/patient-monitoring-ui.jpg" caption="Realtime Dashboard" >}}
+![Realtime Dashboard](./images/covid19-rpms-go-vue/patient-monitoring-ui.jpg)
 
 ## Deployment
 
@@ -221,7 +192,7 @@ With their support, we were able to set up a solid network. Next, we started an 
 
 Keshara did the heavy lifting in here also, risking his own life in a hospital with possible COVID Patients.
 
-{{< figure class="align-center" src="/img/covid19-rpms-go-vue/setting-up-deployment.jpg" caption="Keshara is deplyoing the system in hospital" >}}
+![Keshara is deplyoing the system in hospital](./images/covid19-rpms-go-vue/setting-up-deployment.jpg)
 
 ## Going production
 
@@ -229,9 +200,9 @@ In the pictures and videos below you can see it in action.
 
 {{< youtube eqv4vrrX8vE  >}}
 
-{{< figure class="align-center" src="/img/covid19-rpms-go-vue/prod-1.jpg" caption="Dr. Sudarshana Wickramasinghe is testing the system" >}}
+![Dr. Sudarshana Wickramasinghe is testing the system](./images/covid19-rpms-go-vue/prod-1.jpg)
 
-{{< figure class="align-center" src="/img/covid19-rpms-go-vue/prod-2.jpg" caption="Keshara and Dr. Sudarshana after deployment" >}}
+![Keshara and Dr. Sudarshana after deployment](./images/covid19-rpms-go-vue/prod-2.jpg)
 
 ## End Notes
 

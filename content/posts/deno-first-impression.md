@@ -10,6 +10,7 @@ description: >-
 tags: ["deno", "typescript", "ts", "javascript", "js", "es6"]
 categories: ["deno", "typescript"]
 author: "Kasun Vithanage"
+cover_image: ./images/deno-first-impression/featured.png
 
 # You can also close(false) or open(true) something for this content.
 # P.S. comment can only be closed
@@ -43,7 +44,6 @@ sequenceDiagrams:
 ---
 
 <!--article-->
-{{< figure class="align-center" src="/img/deno-first-impression/featured.png" >}}
 
 Deno is a new secure runtime for javascript and typescript created by Ryan Dahl, the original author of NodeJS. Recently Deno 1.0.0 was released
 and this is my first impression about it.
@@ -156,7 +156,7 @@ const res = await fetch(url);
 Follow the installation [guide](https://deno.land/manual/getting_started/installation) to get started with Deno. 
 Check if it's installed by executing `deno` in your shell. It should be like this
 
-{{< figure class="align-center" src="/img/deno-first-impression/deno-shell.png" caption="Deno shell" >}}
+![Deno shell](./images/deno-first-impression/deno-shell.png)
 
 ### Getting lines from Stdin
 
@@ -193,7 +193,7 @@ Now run this with `deno run sgrep.ts`
 
 You will see something like below. Now try typing some words and check them echo back.
 
-{{< figure class="align-center" src="/img/deno-first-impression/read-stdin.png" caption="Reading stdin and echo" >}}
+![Reading stdin and echo](./images/deno-first-impression/read-stdin.png)
 
 ### Parse arguments
 
@@ -268,7 +268,7 @@ console.log(colors.red("hey this is red"));
 
 If your terminal supports, it will show red colour text like below.
 
-{{< figure class="align-center" src="/img/deno-first-impression/color-output.png" caption="Color output" >}}
+![Color output](./images/deno-first-impression/color-output.png)
 
 Now to highlight any text with the matching `needle` we can simply use a `RegEx` as below
 
@@ -417,13 +417,13 @@ So when we run our program, we need `cat` to pipe out input to `sgrep`.
 cat file.txt | deno run sgrep.ts who
 ```
 
-{{< figure class="align-center" src="/img/deno-first-impression/output-nocolor.png" caption="sgrep output without colors" >}}
+![sgrep output without colors](./images/deno-first-impression/output-nocolor.png)
 
 ```bash
 cat file.txt | deno run sgrep.ts --colors=true who
 ```
 
-{{< figure class="align-center" src="/img/deno-first-impression/output-color.png" caption="sgrep output with colors" >}}
+![sgrep output with colors](./images/deno-first-impression/output-color.png)
 
 Now we have created a small nice grep utility with deno. Hooray. :muscle:
 

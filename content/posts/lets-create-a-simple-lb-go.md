@@ -9,40 +9,9 @@ tags: ["go", "golang", "load-balancer"]
 categories: ["go"]
 author: "Kasun Vithanage"
 
-# You can also close(false) or open(true) something for this content.
-# P.S. comment can only be closed
-comment: true
-toc: true
-autoCollapseToc: false
-postMetaInFooter: false
-hiddenFromHomePage: false
-# You can also define another contentCopyright. e.g. contentCopyright: "This is another copyright."
-contentCopyright: false
-reward: false
-mathjax: false
-mathjaxEnableSingleDollar: false
-mathjaxEnableAutoNumber: false
-
-# You unlisted posts you might want not want the header or footer to show
-hideHeaderAndFooter: false
-
-# You can enable or disable out-of-date content warning for individual post.
-# Comment this out to use the global config.
-#enableOutdatedInfoWarning: false
-
-flowchartDiagrams:
-  enable: false
-  options: ""
-
-sequenceDiagrams: 
-  enable: false
-  options: ""
-
+cover_image: ./images/lets-create-a-load-balancer/featured.png
 ---
 
-<!--article-->
-
-{{< figure class="align-center" src="/img/lets-create-a-load-balancer/featured.png" >}}
 
 Load Balancers plays a key role in Web Architecture. They allow distributing load among a set of backends. This makes services more scalable.
 Also since there are multiple backends configured the service become highly available as load balancer can pick up a working server in case of a failure.
@@ -63,13 +32,13 @@ For example,
 
 For our simple load balancer, we would try implementing the simplest one among these methods, **Round Robin**.
 
-{{< figure class="align-center" src="/img/lets-create-a-load-balancer/lb-archi.png" caption="A Round Robin Load Balancer" >}}
+![A Round Robin Load Balancer](./images/lets-create-a-load-balancer/lb-archi.png)
 
 ## Round Robin Selection
 
 Round Robin is simple in terms. It gives equal opportunities for workers to perform tasks in turns.
 
-{{< figure class="align-center" src="/img/lets-create-a-load-balancer/lb-rr.png" caption="Round Robin Selection on incoming requests" >}}
+![Round Robin Selection on incoming requests](./images/lets-create-a-load-balancer/lb-rr.png)
 
 As shown in the figure about this happens cyclically. But we can't *directly* use that aren't we?
 
@@ -156,7 +125,7 @@ We already know that our requests are routed in a cycle for each backend. All we
 
 `GetNext()` always return a value that's capped between 0 and the length of the slice. At any point, we get a next peer and if it's not alive we would have to search through the slice in a cycle.
 
-{{< figure class="align-center" src="/img/lets-create-a-load-balancer/lb-slice-traverse.png" caption="Traverse the slice as a cycle" >}}
+![Traverse the slice as a cycle](./images/lets-create-a-load-balancer/lb-slice-traverse.png)
 
 As shown in the figure above, we want to traverse from next to the entire list, which can be done simply by traversing `next + length`
 But to pick an index, we want to cap it between slice length. It can be easily done with modding operation.
@@ -404,9 +373,9 @@ My specs are Core i7, 16GiB Ram, Windows 10 Education.
 
 Test was carried out using Apache JMeter with 5000 concurrent users, 2 loops total 10000 requests.
 
-{{< figure class="align-center" src="/img/lets-create-a-load-balancer/bench-jmeter.png" caption="JMeter test setup" >}}
+![JMeter test setup](./images/lets-create-a-load-balancer/bench-jmeter.png)
 
-{{< figure class="align-center" src="/img/lets-create-a-load-balancer/bench-result.png" caption="JMeter test result(using CLI)" >}}
+![JMeter test result(using CLI)](./images/lets-create-a-load-balancer/bench-result.png)
 
 We get around 700 Transactions per second for our simple load balancer, which is not bad at all. -->
 
