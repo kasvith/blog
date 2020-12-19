@@ -114,14 +114,14 @@ module.exports = {
         }),
       },
     },
-    // {
-    //   use: "@gridsome/plugin-critical",
-    //   options: {
-    //     paths: ["/"],
-    //     width: 1300,
-    //     height: 900,
-    //   },
-    // },
+    {
+      use: "@gridsome/plugin-critical",
+      options: {
+        paths: ["/"],
+        width: 1300,
+        height: 900,
+      },
+    },
     // {
     //   use: "gridsome-plugin-purgecss",
     //   // default options, the following will be included if you don't provide anything
