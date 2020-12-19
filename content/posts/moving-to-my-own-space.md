@@ -2,7 +2,7 @@
 title: "Moving to My Own Space"
 date: 2019-07-29T00:24:44+05:30
 lastmod: 2019-07-29T00:24:44+05:30
-draft: false
+published: true
 keywords: ["moving", "blog"]
 description: "I decided to pull off all my blogs to a personal space"
 tags: ["blogging", "hugo", "gohugo"]
@@ -10,6 +10,8 @@ categories: ["opinions"]
 author: "Kasun Vithanage"
 
 ---
+
+I decided to pull off all my blogs to a personal space ⚡️
 
 ## Why moving to own space
 

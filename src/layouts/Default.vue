@@ -1,15 +1,6 @@
 <template>
   <div id="app">
-    <header>
-      <div class="header-bar" />
-      <div class="header-inner container flex">
-        <Logo v-if="showLogo" />
-
-        <nav class="header-actions flex flex--align-right">
-          <ToggleTheme />
-        </nav>
-      </div>
-    </header>
+    <app-header :show-logo="showLogo" />
 
     <main class="main">
       <slot />
@@ -23,95 +14,27 @@
         >Powered by <a href="//gridsome.org"> Gridsome </a></span
       >
     </footer>
+
+    <scroll-to-top />
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import ToggleTheme from '~/components/ToggleTheme.vue'
+import ScrollToTop from '~/components/ScrollToTop.vue'
+import AppHeader from './partials/Header'
 
 export default {
   props: {
     showLogo: { default: true }
   },
   components: {
-    Logo,
-    ToggleTheme
+    ScrollToTop,
+    AppHeader
   }
 }
 </script>
 
 <style lang="scss">
-// .header {
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   min-height: var(--header-height);
-//   padding: 0 calc(var(--space) / 2);
-//   top:0;
-//   z-index: 10;
-
-//   &__left,
-//   &__right {
-//     display: flex;
-//     align-items: center;
-//   }
-
-//   @media screen and (min-width: 1300px) {
-//     //Make header sticky for large screens
-//     position: sticky;
-//     width: 100%;
-//   }
-// }
-
-header {
-  z-index: 20;
-  position: relative;
-  top: 0;
-  background-color: var(--bg-transparent);
-  border-bottom: 1px solid var(--border-color);
-  flex-wrap: nowrap;
-  position: sticky;
-  // transition: background-color 0.3s, border-color, 0.3s;
-  .header {
-    &-bar {
-      background: linear-gradient(
-        90deg,
-        var(--primary-color) 0%,
-        #8ed6fb 50%,
-        #d32e9d 100%
-      );
-      padding: 2px;
-      text-align: center;
-      color: #fff;
-      font-size: 1rem;
-      a {
-        color: currentColor;
-      }
-    }
-
-    &-inner {
-      padding: 0 var(--space);
-      min-height: var(--header-height);
-    }
-
-    &-actions {
-      .right {
-        margin-left: auto;
-        align-items: flex-end;
-      }
-    }
-  }
-
-  @media screen and (min-width: 992px) and (max-resolution: 1) {
-    backdrop-filter: blur(4px);
-  }
-
-  @media screen and (min-width: 992px) and (-webkit-max-device-pixel-ratio: 1) {
-    backdrop-filter: blur(4px);
-  }
-}
-
 .main {
   margin: 0 auto;
   padding: 1.5vw 15px 0;

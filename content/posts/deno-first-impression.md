@@ -2,7 +2,7 @@
 title: "Deno - first impression"
 date: 2020-05-14T16:13:29+05:30
 lastmod: 2020-05-14T16:13:29+05:30
-draft: false
+published: true
 keywords: ["deno", "typescript", "ts", "javascript", "js", "es6"]
 description: >-
   Deno is a new secure runtime for javascript and typescript created by Ryan Dahl, the original author of NodeJS. Recently Deno 1.0.0 was released
@@ -11,36 +11,6 @@ tags: ["deno", "typescript", "ts", "javascript", "js", "es6"]
 categories: ["deno", "typescript"]
 author: "Kasun Vithanage"
 cover_image: ./images/deno-first-impression/featured.png
-
-# You can also close(false) or open(true) something for this content.
-# P.S. comment can only be closed
-comment: true
-toc: true
-autoCollapseToc: false
-postMetaInFooter: false
-hiddenFromHomePage: false
-# You can also define another contentCopyright. e.g. contentCopyright: "This is another copyright."
-contentCopyright: false
-reward: false
-mathjax: false
-mathjaxEnableSingleDollar: false
-mathjaxEnableAutoNumber: false
-
-# You unlisted posts you might want not want the header or footer to show
-hideHeaderAndFooter: false
-
-# You can enable or disable out-of-date content warning for individual post.
-# Comment this out to use the global config.
-#enableOutdatedInfoWarning: false
-
-flowchartDiagrams:
-  enable: false
-  options: ""
-
-sequenceDiagrams: 
-  enable: false
-  options: ""
-
 ---
 
 <!--article-->

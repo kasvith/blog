@@ -1,0 +1,25 @@
+.tags {
+  margin: 2em 0 3em;
+  text-align: center;
+
+  a {
+    text-decoration: none;
+    color: currentColor;
+    text-decoration: none;
+    background-color: var(--bg-color);
+    color: currentColor !important; //Todo: remove important;
+    padding: 0.5em;
+    border-radius: var(--radius);
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  .tag {
+    display: inline-block;
+    position: relative;
+    margin: 5px 10px;
+  }
+}

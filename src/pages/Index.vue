@@ -5,15 +5,18 @@
 
     <!-- List posts -->
     <div class="posts">
-      <PostCard v-for="edge in $page.posts.edges" :key="edge.node.id" :post="edge.node"/>
+      <PostCard
+        v-for="edge in $page.posts.edges"
+        :key="edge.node.id"
+        :post="edge.node"
+      />
     </div>
-
   </Layout>
 </template>
 
 <page-query>
 query {
-  posts: allPost(limit: 10, filter: { draft: { eq: false } }) {
+  posts: allPost(limit: 4, filter: { published: { eq: true } }) {
     edges {
       node {
         id
@@ -44,7 +47,7 @@ export default {
     PostCard
   },
   metaInfo: {
-    title: 'a personal blog space'
+    titleTemplate: '%s'
   }
 }
 </script>

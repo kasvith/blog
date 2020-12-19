@@ -2,7 +2,7 @@
 title: "Let's Create a Simple Load Balancer With Go"
 date: 2019-11-09T00:11:56+05:30
 lastmod: 2019-11-09T00:11:56+05:30
-draft: false
+published: true
 keywords: ["go", "golang", "load-balancer", "loadbalancer"]
 description: "Load Balancers plays a key role in Web Architecture. In this post we are going to develop a simple load balancer with power of Go"
 tags: ["go", "golang", "load-balancer"]

@@ -1,7 +1,7 @@
 ---
 title: "How We Created a Realtime Patient Monitoring System With Go and Vue in 3 days"
 date: 2020-04-25T00:55:56+05:30
-draft: false
+published: true
 keywords:
   [
     "go",
@@ -14,6 +14,9 @@ keywords:
   ]
 tags: ["go", "covid19", "vue"]
 author: "Kasun Vithanage"
+description: >-
+    We helped frontline to fight against covid-19 by creating a Realtime Patient Monitoring system.
+    In this blog post you can find out how we did it using go and vuejs
 cover_image: ./images/covid19-rpms-go-vue/featured.png
 ---
 

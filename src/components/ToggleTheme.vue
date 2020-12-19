@@ -5,20 +5,13 @@
     @click.prevent="toggleTheme"
     class="toggle-theme"
   >
-    <moon v-if="darkTheme" />
-    <sun v-else />
+    <span class="icon" :class="darkTheme ? 'icon-moon' : 'icon-sun'" />
   </button>
 </template>
 
 <script>
-import Moon from '~/assets/images/mode/moon.svg'
-import Sun from '~/assets/images/mode/sun.svg'
-
 export default {
-  components: {
-    Sun,
-    Moon
-  },
+
   data() {
     return {
       darkTheme: false
@@ -45,17 +38,4 @@ export default {
 </script>
 
 <style lang="scss">
-.toggle-theme {
-  background-color: transparent;
-  border: 0;
-  color: var(--body-color);
-  cursor: pointer;
-
-  &:hover {
-    opacity: 0.8;
-  }
-  &:focus {
-    outline: none;
-  }
-}
 </style>

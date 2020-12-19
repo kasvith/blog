@@ -12,17 +12,14 @@
     <h1 v-if="showTitle" class="author__site-title">Kasun Vithanage</h1>
 
     <p class="author__intro">
-      Opensource &#x1F499; <br />
+      Opensource &#x1F9E1; <br />
       Always learning something new &#x1F317;
     </p>
 
     <p class="author__links">
-      <a href="//fb.com/kasvith" target="__blank"><facebook /></a>
-      <a href="//twitter.com/kasvith" target="__blank"><twitter /></a>
-      <a href="//github.com/kasvith" target="__blank"><github /></a>
-      <a href="//gitlab.com/kasvith" target="__blank"><gitlab /></a>
-      <a href="mailto:alankasun@gmail.com" target="__blank"><email /></a>
-      <a href=""><rss /></a>
+      <a :href="link.to" target="_blank" v-for="link in links" :key="link.to">
+        <span class="icon" :class="link.icon" />
+      </a>
     </p>
   </div>
 </template>
@@ -36,23 +33,38 @@ query {
 </static-query>
 
 <script>
-import Twitter from '~/assets/images/social/twitter.svg'
-import Github from '~/assets/images/social/github.svg'
-import Gitlab from '~/assets/images/social/gitlab.svg'
-import Facebook from '~/assets/images/social/facebook.svg'
-import Email from '~/assets/images/social/send.svg'
-import Rss from '~/assets/images/social/rss.svg'
-
 export default {
-  components: {
-    Twitter,
-    Github,
-    Gitlab,
-    Facebook,
-    Email,
-    Rss
-  },
-  props: ['showTitle']
+  props: ['showTitle'],
+  data() {
+    return {
+      links: [
+        {
+          to: '//fb.com/kasvith',
+          icon: 'icon-facebook'
+        },
+        {
+          to: '//twitter.com/kasvith',
+          icon: 'icon-twitter'
+        },
+        {
+          to: '//github.com/kasvith',
+          icon: 'icon-github'
+        },
+        {
+          to: '//gitlab.com/kasvith',
+          icon: 'icon-gitlab'
+        },
+        {
+          to: 'mailto:alankasun@gmail.com',
+          icon: 'icon-send'
+        },
+        {
+          to: '/feed.xml',
+          icon: 'icon-rss'
+        }
+      ]
+    }
+  }
 }
 </script>
 
@@ -82,6 +94,7 @@ export default {
     margin-top: -0.5em;
     a {
       margin: 0 0.5em;
+      text-decoration: none;
     }
   }
 }

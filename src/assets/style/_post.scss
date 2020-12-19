@@ -1,0 +1,119 @@
+.post {
+  &-title {
+    padding: calc(var(--space) / 2) 0 calc(var(--space) / 2);
+    text-align: center;
+  }
+
+  &__header {
+    width: calc(100% + var(--space) * 2);
+    margin-left: calc(var(--space) * -1);
+    margin-top: calc(var(--space) * -1);
+    margin-bottom: calc(var(--space) / 2);
+    overflow: hidden;
+    border-radius: var(--radius) var(--radius) 0 0;
+
+    img {
+      width: 100%;
+    }
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  &__content {
+    h2:first-child {
+      margin-top: 0;
+    }
+
+    p:first-of-type {
+      font-size: 1.2em;
+      color: var(--title-color);
+    }
+
+    img {
+      width: calc(100% + var(--space) * 2);
+      margin-left: calc(var(--space) * -1);
+      padding: 5px calc(var(--space) / 2);
+      display: block;
+      max-width: none;
+    }
+
+    figcaption {
+      text-align: center;
+      font-size: 0.95em;
+    }
+
+    h1,
+    h2,
+    h3 {
+      padding-top: 6rem;
+      margin-top: -5rem;
+
+      a {
+        float: left;
+        top: 0.12em;
+        margin-left: -1.2em;
+        font-size: 0.85em;
+        text-align: center;
+        width: 0.8em;
+        opacity: 0;
+        color: var(--primary-color-dark);
+        box-shadow: none;
+        background: none;
+
+        &::before {
+          content: " ";
+          position: absolute;
+          top: 0;
+          height: 100%;
+        }
+
+        &::after {
+          display: none;
+        }
+      }
+
+      &:hover a {
+        opacity: 1;
+      }
+    }
+
+    h2 {
+      &::before {
+        content: " ";
+        display: block;
+        margin-bottom: 1.5rem;
+        border-top: 1px solid var(--border-color);
+        transition: border-color 0.3s;
+      }
+    }
+  }
+
+  &-comments {
+    padding: calc(var(--space));
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  &-author {
+    margin-top: calc(var(--space) / 2);
+  }
+
+  &-tags {
+    margin: 1em 0 0;
+
+    &__link {
+      margin-right: 0.7em;
+      font-size: 0.8em;
+      color: currentColor;
+      text-decoration: none;
+      background-color: var(--bg-color);
+      color: currentColor !important; //Todo: remove important;
+      padding: 0.5em;
+      border-radius: var(--radius);
+    }
+  }
+}

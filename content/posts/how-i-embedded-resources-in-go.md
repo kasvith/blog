@@ -4,7 +4,7 @@ description: >-
   During my internship period at WSO2, Inc  I worked on a project to develop a 
   CI/CD pipeline for WSO2  API  Manager.  The tooling was…
 date: 2019-07-26T16:34:56.497Z
-draft: false
+published: true
 comment: true
 categories: ["go", "golang", "generate"]
 tags: ["go", "golang", "generate", "code-generation"]
