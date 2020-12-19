@@ -23,6 +23,11 @@ export default function (Vue, { router, head, isClient }) {
   // global meta
   head.meta.push(
     {
+      key: "og:title",
+      name: "og:title",
+      content: "kasvith.me",
+    },
+    {
       key: "og:type",
       name: "og:type",
       content: "website",
