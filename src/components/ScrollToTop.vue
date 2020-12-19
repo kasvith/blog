@@ -21,7 +21,7 @@ export default {
         if (window.pageYOffset === 0) {
           clearInterval(this.intervalId)
         }
-        window.scroll(0, window.pageYOffset - 50)
+        window.scroll(0, window.pageYOffset - 300)
       }, 20)
     },
     scrollListener: function (e) {
