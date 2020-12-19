@@ -2,7 +2,7 @@
   "name": "kasvith.me",
   "private": true,
   "scripts": {
-    "build": "gridsome build",
+    "build": "gridsome build && workbox generateSW workbox-config.js",
     "develop": "gridsome develop",
     "explore": "gridsome explore"
   },
