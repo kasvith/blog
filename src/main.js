@@ -68,6 +68,11 @@ export default function (Vue, { router, head, isClient }) {
       content: "summary_large_image",
     },
     {
+      key: "twitter:image",
+      name: "twitter:image",
+      content: "https://kasvith.me/img/featured.jpg",
+    },
+    {
       key: "twitter:creator",
       name: "twitter:creator",
       content: "@kasvith",
