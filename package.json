@@ -1,12 +1,13 @@
 {
-  "name": "gridsome-blog",
+  "name": "kasvith.me",
   "private": true,
   "scripts": {
-    "build": "gridsome build",
+    "build": "gridsome build && workbox generateSW workbox-config.js",
     "develop": "gridsome develop",
     "explore": "gridsome explore"
   },
   "dependencies": {
+    "@gridsome/plugin-critical": "^0.2.0",
     "@gridsome/plugin-google-analytics": "^0.1.0",
     "@gridsome/plugin-sitemap": "^0.4.0",
     "@gridsome/remark-prismjs": "^0.2.0",
@@ -21,8 +22,10 @@
     "vue-disqus": "^4.0.1"
   },
   "devDependencies": {
+    "gridsome-plugin-purgecss": "^1.0.12",
     "node-sass": "^4.12.0",
     "sass-loader": "^8.0.0",
-    "vue-svg-loader": "^0.16.0"
+    "vue-svg-loader": "^0.16.0",
+    "workbox-cli": "^6.0.2"
   }
 }
