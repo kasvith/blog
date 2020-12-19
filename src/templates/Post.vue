@@ -45,7 +45,7 @@ export default {
   },
   computed: {
     cover() {
-      return `${this.$static.metadata.siteUrl}${this.$page.post.cover_image.src}`
+      return this.$page.post.cover_image ? `${this.$static.metadata.siteUrl}${this.$page.post.cover_image.src}` : "https://kasvith.me/img/featured.jpg"
     },
     postUrl() {
       let siteUrl = this.$static.metadata.siteUrl;
@@ -93,7 +93,7 @@ export default {
         {
           key: 'og:image',
           name: 'og:image',
-          content: this.cover || "https://kasvith.me/img/featured.jpg",
+          content: this.cover,
         },
         {
           key: 'twitter:title',
@@ -108,7 +108,7 @@ export default {
         {
           key: 'twitter:image',
           name: 'twitter:image',
-          content: this.cover || "https://kasvith.me/img/featured.jpg",
+          content: this.cover,
         },
         { key: 'keywords', name: 'keywords', content: this.keywords },
       ]
