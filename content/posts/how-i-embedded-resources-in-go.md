@@ -6,8 +6,8 @@ description: >-
 date: 2019-07-26T16:34:56.497Z
 published: true
 comment: true
-categories: ["go", "golang", "generate"]
-tags: ["go", "golang", "generate", "code-generation"]
+tags: ["go", "golang"]
+keywords: ["go", "golang", "generate", "code-generation"]
 cover_image: ./images/how-i-embedded-resources-in-go/featured.png
 ---
 

@@ -7,8 +7,20 @@
 module.exports = {
   siteName: "kasvith.me",
   siteUrl: "https://kasvith.me",
+  author: "Kasun Vithanage",
   siteDescription:
     "A personal blog space where I write about stuffs I know and like",
+  keywords: [
+    "Kasun Vithanage",
+    "Kasun",
+    "Vithanage",
+    "Blogging",
+    "Articles",
+    "Technology",
+    "Computer Science",
+    "Golang",
+    "Vue",
+  ],
 
   templates: {
     Post: "/posts/:title",
@@ -23,10 +35,10 @@ module.exports = {
 
   plugins: [
     {
-      use: '@gridsome/plugin-google-analytics',
+      use: "@gridsome/plugin-google-analytics",
       options: {
-        id: 'UA-144761237-1'
-      }
+        id: "UA-144761237-1",
+      },
     },
     {
       // Create posts from markdown files
@@ -113,13 +125,12 @@ module.exports = {
         content: {
           type: "text",
           value: "#",
-          
-        }
+        },
       },
       plugins: [
         "gridsome-plugin-remark-prismjs-all",
         "remark-emoji",
-        "gridsome-remark-figure-caption"
+        "gridsome-remark-figure-caption",
       ],
     },
   },

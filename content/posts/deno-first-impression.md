@@ -8,7 +8,6 @@ description: >-
   Deno is a new secure runtime for javascript and typescript created by Ryan Dahl, the original author of NodeJS. Recently Deno 1.0.0 was released
   and this is my first impression about it
 tags: ["deno", "typescript", "ts", "javascript", "js", "es6"]
-categories: ["deno", "typescript"]
 author: "Kasun Vithanage"
 cover_image: ./images/deno-first-impression/featured.png
 ---

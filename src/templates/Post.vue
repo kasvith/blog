@@ -43,6 +43,24 @@ export default {
     PostMeta,
     PostTags
   },
+  computed: {
+    cover() {
+      return `${this.$static.metadata.siteUrl}${this.$page.post.cover_image.src}`
+    },
+    postUrl() {
+      let siteUrl = this.$static.metadata.siteUrl;
+      let postPath = this.$page.post.path;
+
+      return `${siteUrl}${postPath}`;
+    },
+    keywords() {
+      let keywords = ''
+      for (let i in this.$page.post.keywords) {
+        keywords = keywords.concat(`${this.$page.post.keywords[i]},`)
+      }
+      return keywords.replace(/(^\s*,)|(,\s*$)/g, '')
+    }
+  },
   metaInfo() {
     return {
       title: this.$page.post.title,
@@ -63,9 +81,19 @@ export default {
           content: this.$page.post.description,
         },
         {
+          key: "og:url",
+          property: "og:url",
+          content: this.postUrl
+        },
+        {
+          key: "article:published_time",
+          property: "article:published_time",
+          content: this.$page.post.date
+        },
+        {
           key: 'og:image',
           name: 'og:image',
-          content: this.$page.post.cover_image,
+          content: this.cover || "https://kasvith.me/img/featured.jpg",
         },
         {
           key: 'twitter:title',
@@ -80,13 +108,22 @@ export default {
         {
           key: 'twitter:image',
           name: 'twitter:image',
-          content: this.$page.post.cover_image,
+          content: this.cover || "https://kasvith.me/img/featured.jpg",
         },
+        { key: 'keywords', name: 'keywords', content: this.keywords },
       ]
     }
   }
 }
 </script>
+
+<static-query>
+    query {
+        metadata {
+            siteUrl
+        }
+    }
+</static-query>
 
 <page-query>
 query Post ($id: ID!) {
@@ -106,6 +143,7 @@ query Post ($id: ID!) {
     }
     description
     content
+    keywords
     cover_image (width: 860, blur: 10)
   }
 }
