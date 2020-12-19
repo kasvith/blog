@@ -1,7 +1,6 @@
 {
     "name": "kasvith.me",
     "short_name": "kasvith.me",
-    "lang": "en-US",
     "start_url": "/",
     "display": "standalone",
     "theme_color": "#29b473",
