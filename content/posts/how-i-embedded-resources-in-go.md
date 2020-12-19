@@ -3,13 +3,13 @@ title: How  I Embedded Resources  in  Go
 description: >-
   During my internship period at WSO2, Inc  I worked on a project to develop a 
   CI/CD pipeline for WSO2  API  Manager.  The tooling was…
-date: '2019-07-26T16:34:56.497Z'
+date: 2019-07-26T16:34:56.497Z
+published: true
 comment: true
-categories: ["go", "golang", "generate"]
+tags: ["go", "golang"]
 keywords: ["go", "golang", "generate", "code-generation"]
+cover_image: ./images/how-i-embedded-resources-in-go/featured.png
 ---
-
-{{< figure class="align-center" src="/img/1__ig3iBEzTcnXV1ZGnj91__Dw.png" >}}
 
 During my internship period at [WSO2, Inc](https://wso2.com) I worked on a project to develop a CI/CD pipeline for WSO2 API Manager. The tooling was mostly done in Golang.
 
@@ -61,11 +61,11 @@ When you execute `go generate filename.go` the compiler will check for the magic
 
 ### The Setup
 
-![The architecture of our resource box](/img/1__IZ3sMqu1fNNZ517hvqjRvA.png)
+![The architecture of our resource box](./images/how-i-embedded-resources-in-go/architecture.png)
 
 My main requirement was to storing files as bytes and accessing them in my go files. To fulfil the same requirement I created a package called `box`. It was acting as a **proxy** between consumers and data source. We store our all files inside a special directory called resources inside the box package. It can contain directories as well to organize content.
 
-{{< figure class="align-center" caption="Resources directory containing all the files we need" src="/img/1__GMAu7w8DFz9Tvc__u__foi0w.png" >}}
+![Resources directory containing all the files we need](./images/how-i-embedded-resources-in-go/resource-dir.png)
 
 > This makes editing content much more easier and much more clean as they are just files in the system.
 
@@ -359,8 +359,7 @@ func main() {
 
 Now just run `go generate ./…` within your application and you can find a file called `box/blob.go` , it will contain all the data for resources in your `box/resources` directory.
 
-![The generated blob file](/img/1__OnvadzVX6pOyReAVwnVLcQ.png)
-The generated blob file
+![The generated blob file](./images/how-i-embedded-resources-in-go/generated-blob.png)
 
 Now all you have to do is invoking `box.Get('/sample/sample_config.yaml')` to get the data from your file. Now it is embedded in your Go binary.
 
