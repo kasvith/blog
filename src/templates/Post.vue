@@ -67,17 +67,17 @@ export default {
       meta: [
         {
           key: 'og:title',
-          name: 'og:title',
+          property: 'og:title',
           content: this.$page.post.title,
         },
         {
           key: 'og:type',
-          name: 'og:type',
+          property: 'og:type',
           content: 'article',
         },
         {
           key: 'og:description',
-          name: 'og:description',
+          property: 'og:description',
           content: this.$page.post.description,
         },
         {
@@ -92,7 +92,7 @@ export default {
         },
         {
           key: 'og:image',
-          name: 'og:image',
+          property: 'og:image',
           content: this.cover,
         },
         {
@@ -110,7 +110,11 @@ export default {
           name: 'twitter:image',
           content: this.cover,
         },
-        { key: 'keywords', name: 'keywords', content: this.keywords },
+        {
+          key: 'keywords',
+          name: 'keywords',
+          content: this.keywords
+        },
       ]
     }
   }

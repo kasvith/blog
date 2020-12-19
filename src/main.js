@@ -28,11 +28,6 @@ export default function (Vue, { router, head, isClient }) {
       content: "kasvith.me",
     },
     {
-      key: "og:type",
-      name: "og:type",
-      content: "website",
-    },
-    {
       key: "keywords",
       name: "keywords",
       content: config.keywords,
@@ -44,13 +39,17 @@ export default function (Vue, { router, head, isClient }) {
     { name: "copyright", content: copyRightNotice },
     {
       key: "og:site_name",
-      name: "og:site_name",
+      property: "og:site_name",
       content: config.siteName,
     },
-    { key: "og:type", property: "og:type", content: "article" },
+    {
+      key: "og:type",
+      property: "og:type",
+      content: "website",
+    },
     {
       key: "og:description",
-      name: "og:description",
+      property: "og:description",
       content: config.siteDescription,
     },
     {
