@@ -47,7 +47,7 @@ export default {
     PostCard
   },
   metaInfo: {
-    titleTemplate: '%s'
+    title: 'Kasun Vithanage'
   }
 }
 </script>
