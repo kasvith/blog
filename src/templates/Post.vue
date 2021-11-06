@@ -43,6 +43,13 @@ export default {
     PostMeta,
     PostTags
   },
+  mounted() {
+    import('medium-zoom').then(mediumZoom => {
+      this.zoom = mediumZoom.default('#app > main > div.post.content-box > div.post__content > figure > img', {
+        margin: 15,
+      })
+    })
+  },
   computed: {
     cover() {
       return this.$page.post.cover_image ? `${this.$static.metadata.siteUrl}${this.$page.post.cover_image.src}` : "https://kasvith.me/img/featured.jpg"
