@@ -2,7 +2,7 @@
 title: "Using Dataloader with NestJS"
 date: 2021-11-06T06:50:54.512Z
 lastmod: 2021-11-06T06:50:54.512Z
-published: false
+published: true
 keywords: ["nestjs", "graphql", "dataloader", "typescript", "ts"]
 description: >-
   NestJS is a powerful framework to develop server-side applications. With GraphQL support, it is easy to create scalable services with NestJS. Dataloader plays a crucial part in developing high perfomance GraphQL services. It eliminates the N+1 problem allowing services to be more responsive. In this small article, we will discuss how I integrated Dataloader into a NestJS application.
@@ -149,10 +149,227 @@ Add Dataloader to the project by running
 
 ```bash
 npm install --save dataloader
+``` 
+
+Don't forget to add `"esModuleInterop": true` to your `tsconfig.json`
+
+```json
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    // others
+  }
+}
+
 ```
 
-Dataloader doesn't know how to fetch data from a source. We need to provide a batch function to `dataloader` so it can load items from the data source.  
+Then we can import dataloader by simply using 
 
-### Dataloader module
+```ts
+import DataLoader from 'dataloader'
+```
 
-We will
+### Integration in a Nutshell :shell:
+
+This is the outline of the process. TLDR;
+
+1. Create a `dataloader` module
+2. Import the services that knows how to load data from sources(for example `UserService` from `UserModule`)
+3. Create a `createDataloaders()` method, which initiates new set of dataloaders with given sources.
+4. Add the loader to the `context` so it can be accessed by any resolver
+
+### Dataloader module :hammer_and_wrench:
+
+We will create a new module to keep all dataloader related code.
+Since dataloader doesn't know how to load data, we will need to provide **batch functions** that can load data from sources.
+You will often write them in the respective modules(like a `UserModule` contains the logic to load multiple users).
+
+In our case, we have `OwnersService` which knows how to load a bunch of owners at once from the data layer.
+
+Let's define dataloader module
+
+```ts
+@Module({
+  providers: [DataloaderService],
+  imports: [OwnersModule], // we will use `findOwnersByIdBatch` to load owners
+  exports: [DataloaderService], // we are exporting dataloader service
+})
+export class DataloaderModule {}
+```
+
+In here I've imported `OwnersModule` so I can use the batch loading method defined in that service.
+
+Batch function looks like follows.
+
+> In here I've used a simple array for simplicity. In a production app this can be a SQL query with `whereIn` or an external API call
+
+```ts
+@Injectable()
+export class OwnersService {
+  // rest of the code ....
+  findOwnersByBatch(ownerIds: number[]): (IOwner | Error)[] {
+    console.debug(`loading ids ${ownerIds}`);
+    const results = owners.filter((owner) => ownerIds.includes(owner.id));
+    const mappedResults = ownerIds.map(
+      (id) =>
+        results.find((result) => result.id === id) ||
+        new Error(`Could not load owner ${id}`),
+    );
+    return mappedResults;
+  }
+  // rest of the code ....
+}
+```
+
+Pay a closer look at `mappedResults` array. It will ensure all the results are in the order that was requested by the dataloader.
+If a certain key was not found, we will return an `Error` instead. `ownersIds` and the `mappedResults` should have the same length.
+
+### Dataloader service
+
+This service is responsible for creating new dataloader instances from data sources.
+
+Let's first define `IDataloaders` interface with our available loaders. It will help us later on while accessing the exposed loders.
+
+```ts
+export interface IDataloaders {
+  ownersLoader: DataLoader<number, IOwner>;
+  // add more loders here as you see fit
+}
+```
+
+and the service would look like follows
+
+```ts
+@Injectable()
+export class DataloaderService {
+  constructor(private readonly ownerService: OwnersService) {}
+
+  createLoaders(): IDataloaders {
+    const ownersLoader = new DataLoader<number, IOwner>(
+      async (keys: readonly number[]) =>
+        this.ownerService.findOwnersByBatch(keys as number[]),
+    );
+
+    return {
+      ownersLoader, // return a new loader
+    };
+  }
+}
+```
+
+`createLoaders` method will create a new set of dataloaders when called.
+
+**These dataloders should not be shared with multiple requests**.
+
+### Use the Context Luke :zap:
+
+This is the tricky part. We all know since dataloaders are usually shared with `Context` of a GraphQL resolver. 
+
+You might be tempted to use a REQUEST scoped provider. This is a bad practice because it will recreate every dependent provider on each request.
+
+Instead, we will inject our dataloaders into the `Apollo Context` with Nest.
+
+We need to use DI to use `DataloaderService` in the GraphQL context. So let's initialize our GraphQLModule a factory method.
+So our `AppModule` would look something like this now
+
+```ts
+@Module({
+  imports: [
+    GraphQLModule.forRootAsync({
+      imports: [DataloaderModule], // <-- import module
+      inject: [DataloaderService], // <-- inject service
+      useFactory: (dataloaderService: DataloaderService) => {
+        return {
+          autoSchemaFile: true,
+          context: () => ({
+            loaders: dataloaderService.createLoaders(),
+          }),
+          // other options
+        };
+      },
+    }),
+    // other services
+  ],
+  // other configs
+})
+export class AppModule {}
+```
+
+Pay a closer attention to these few lines
+
+```ts
+context: () => ({
+   loaders: dataloaderService.createLoaders();
+}),
+```
+
+Here we are passing a function as the context. Nest will use the given function to create a new context
+for each GraphQL request(query/mutation).
+
+We gotta do one thing more. We have setup our context, but its not **Typesafe yet** :worried:
+
+To fix that easily `IDataloaders` interface can be used.
+
+Typescript has a nice feature called [Declaration Merging](https://www.typescriptlang.org/docs/handbook/declaration-merging.html).
+Using this we can simply extend the `IGraphQLContext` interfaces provided by `@nestjs/graphql` package.
+
+Create a new `@types/index.d.ts` file and put the following
+
+```ts
+import { IDataloaders } from '../dataloader/dataloader.interface';
+
+declare global {
+  interface IGraphQLContext {
+    loaders: IDataloaders;
+  }
+}
+```
+
+and update your `tsconfig.json` to use these type declarations.
+
+```json
+{
+  "compilerOptions": {
+    // other options
+    "types": [
+      "./src/@types",
+      // other types
+    ],
+  }
+}
+```
+
+### Using the dataloader :tada:
+
+Now we are ready to use the dataloader. Let's change the previous owner field loader to use the new dataloader.
+
+```ts
+  @ResolveField(() => Owner, {
+    name: 'owner',
+    description: 'Owner of the cat',
+    nullable: true,
+  })
+  getOwner(@Parent() cat: Cat, @Context() { loaders }: IGraphQLContext) {
+    return loaders.ownersLoader.load(cat.ownerId);
+  }
+```
+
+Now we don't use `OwnersService` to fetch the owner directly. Instead, it's using the `load` method from `DataLoader`.
+This call will internally batch the request and return the requested owner.
+
+Now our db log looks like following. Instead of loading the same owner again and again, we are loading all required owners at once. :tada:
+
+```bash
+loading all cats
+loading ids 1,2,3
+```
+
+## Wrapping up :white_check_mark:
+
+Now we have a clean implementation of the DataLoader pattern in NestJS with the powerful DI. You can add more loaders and use them with type-safety. 
+
+This is how I ended up in one of my recent projects. There can be mistakes and also better ways to do the same. Let me know your ideas about this method. 
+
+You can find the source code [here](https://github.com/kasvith/nestjs-dataloader-example)
+
+See you soon, Stay Safe :mask:
