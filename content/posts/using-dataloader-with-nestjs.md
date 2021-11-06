@@ -8,7 +8,7 @@ description: >-
   NestJS is a powerful framework to develop server-side applications. With GraphQL support, it is easy to create scalable services with NestJS. Dataloader plays a crucial part in developing high perfomance GraphQL services. It eliminates the N+1 problem allowing services to be more responsive. In this small article, we will discuss how I integrated Dataloader into a NestJS application.
 tags: ["nestjs", "graphql"]
 author: "Kasun Vithanage"
-cover_image: ./images/deno-first-impression/featured.png
+cover_image: ./images/using-dataloader-with-nestjs/featured.png
 ---
 
 <!--article-->
