@@ -1,12 +1,12 @@
 ---
-title: "Using Dataloader with NestJS"
+title: "Using DataLoader with NestJS"
 date: 2021-11-06T06:50:54.512Z
 lastmod: 2021-11-06T06:50:54.512Z
 published: true
-keywords: ["nestjs", "graphql", "dataloader", "typescript", "ts"]
+keywords: ["nestjs", "graphql", "dataloader", "typescript", "ts", "nest"]
 description: >-
   NestJS is a powerful framework to develop server-side applications. With GraphQL support, it is easy to create scalable services with NestJS. Dataloader plays a crucial part in developing high perfomance GraphQL services. It eliminates the N+1 problem allowing services to be more responsive. In this small article, we will discuss how I integrated Dataloader into a NestJS application.
-tags: ["nestjs", "graphql", "dataloader", "typescript", "ts"]
+tags: ["nestjs", "graphql"]
 author: "Kasun Vithanage"
 cover_image: ./images/deno-first-impression/featured.png
 ---
@@ -171,7 +171,7 @@ import DataLoader from 'dataloader'
 
 ### Integration in a Nutshell :shell:
 
-This is the outline of the process. TLDR;
+This is the outline of the process.
 
 1. Create a `dataloader` module
 2. Import the services that knows how to load data from sources(for example `UserService` from `UserModule`)
