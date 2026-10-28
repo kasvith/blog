@@ -87,6 +87,12 @@ img {
   flex: none;
 }
 
+/* Page content sits in <main>; give it the same vertical rhythm as the shell around it. */
+.wrap > main {
+  display: grid;
+  gap: inherit;
+  min-width: 0;
+}
 .wrap {
   max-width: 1040px;
   margin: 0 auto;
@@ -1198,6 +1204,10 @@ html:has(.lightbox[open]) {
 }
 .foot p a {
   color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+  text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
 }
 .foot-icons {
   display: inline-flex;

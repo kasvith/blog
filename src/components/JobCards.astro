@@ -1,5 +1,6 @@
 ---
 import { ArrowUpRight } from "@lucide/astro";
+import { Image } from "astro:assets";
 import { work } from "../data/site";
 import wz from "../assets/logos/wz-logo.png";
 import sx from "../assets/logos/sx-logo.svg";
@@ -54,7 +55,7 @@ const bars = [44, 66, 52, 80, 64, 96, 74, 108, 88, 116];
             ))}
           </svg>
         )}
-        <img class="brandmark" src={logos[w.art].src} alt="" width="76" height="76" />
+        <Image class="brandmark" src={logos[w.art]} alt="" width={76} height={76} densities={[1, 2]} />
       </div>
       <span class="job-body">
         <span class="role">{w.role}</span>

@@ -108,7 +108,9 @@ const nav = [
           </a>
         </nav>
       </header>
-      <slot />
+      <main>
+        <slot />
+      </main>
       <footer class="foot">
         <p>
           Say hi at <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. I'm kasvith on <a href={SITE.github}>GitHub</a> and{" "}

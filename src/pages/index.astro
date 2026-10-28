@@ -22,7 +22,7 @@ const since = posts.at(-1)?.data.date.getUTCFullYear();
   }}
 >
   <section class="hero">
-    <Image class="avatar" src={me} alt={SITE.name} width={84} height={84} loading="eager" />
+    <Image class="avatar" src={me} alt={SITE.name} width={84} height={84} densities={[1, 2]} loading="eager" />
     <h1>
       Hi, I'm <span>Kasun Vithanage</span>.
     </h1>
