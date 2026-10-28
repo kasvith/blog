@@ -1,7 +1,5 @@
 ---
-import "@fontsource-variable/bricolage-grotesque";
-import "@fontsource-variable/instrument-sans";
-import "@fontsource-variable/jetbrains-mono";
+import { Font } from "astro:assets";
 import "../styles/global.css";
 import { Rss } from "@lucide/astro";
 import Brand from "../components/Brand.astro";
@@ -48,6 +46,14 @@ const nav = [
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <!-- Body and heading fonts are on every page, so fetch them alongside the HTML. Mono loads only where code is. -->
+    <Font cssVariable="--font-body" preload />
+    <Font cssVariable="--font-display" preload />
+    <Font cssVariable="--font-mono" />
+    <script is:inline>
+      // Arriving through a page transition: skip the hero's entrance animation, or the page appears twice.
+      addEventListener("pagereveal", (e) => e.viewTransition && document.documentElement.classList.add("vt"));
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
@@ -79,6 +85,10 @@ const nav = [
     <meta name="theme-color" content="#f1f6f7" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#08131a" media="(prefers-color-scheme: dark)" />
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", ...jsonLd })} />}
+    <!-- Prerender same-site pages on hover, so navigations (and their transitions) feel instant. Files like feed.xml are skipped. -->
+    <script is:inline type="speculationrules">
+      { "prerender": [{ "where": { "and": [{ "href_matches": "/*" }, { "not": { "href_matches": "/*.*" } }] }, "eagerness": "moderate" }] }
+    </script>
   </head>
   <body>
     <div class="wrap">

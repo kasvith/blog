@@ -83,11 +83,13 @@ const jsonLd = {
         // 2× for high-density screens; Astro skips widths larger than the source.
         <Image
           class="cover"
+          style={`view-transition-name: cover-${post.id}`}
           src={cover_image}
           alt={`Cover image for ${title}`}
           widths={[760, 1520]}
           sizes="(min-width: 800px) 760px, 100vw"
           loading="eager"
+          fetchpriority="high"
         />
       )}
       <div class="prose" lang={lang}>

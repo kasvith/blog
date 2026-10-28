@@ -17,7 +17,7 @@ const { posts } = Astro.props;
           <b>{p.data.title}</b>
           <span>{p.data.description}</span>
         </span>
-        <span class="thumb">
+        <span class="thumb" style={p.data.cover_image && `view-transition-name: cover-${p.id}`}>
           {p.data.cover_image ? <Image src={p.data.cover_image} alt="" width={296} /> : <span class="nocover">#{p.data.tags[0]}</span>}
         </span>
       </a>

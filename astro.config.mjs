@@ -1,6 +1,6 @@
 // @ts-check
 import { readdirSync, readFileSync } from "node:fs";
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import { satteri } from "@astrojs/markdown-satteri";
 import { renderMermaidSVG } from "beautiful-mermaid";
@@ -80,7 +80,9 @@ const mermaid = {
         // The site already loads its fonts; drop the renderer's Google Fonts request.
         .replace(/^\s*@import .*$/m, "")
         // Its <style> is global once inlined, so keep those rules on diagrams.
-        .replace(/^(\s*)(svg|text) \{/gm, "$1.diagram $2 {");
+        .replace(/^(\s*)(svg|text) \{/gm, "$1.diagram $2 {")
+        // Astro's Fonts API renames families, so point the text at the site's font variable.
+        .replace(/font-family: [^;]+;/, "font-family: var(--font-body);");
       ctx.replaceNode(pre, { type: "raw", value: `<figure class="diagram">${svg}</figure>` });
     },
   },
@@ -101,6 +103,58 @@ export default defineConfig({
   site: "https://kasvith.me",
   // Gridsome served every page as a directory with a trailing slash; keep the same URLs.
   trailingSlash: "always",
+  // One stylesheet for the whole site; inlining it saves a render-blocking request on the first page view.
+  build: { inlineStylesheets: "always" },
+  // Self-hosted from the installed @fontsource-variable packages. Astro adds preload links and size-matched fallback
+  // faces, so text doesn't jump when the real font swaps in. (Its npm provider emits file:// URLs Astro 7.4 can't read.)
+  // ponytail: Latin subset only; any other character falls back to the system font, add latin-ext if posts need it.
+  fonts: [
+    {
+      provider: fontProviders.local(),
+      name: "Instrument Sans",
+      cssVariable: "--font-body",
+      fallbacks: ["system-ui", "sans-serif"],
+      options: {
+        variants: [
+          {
+            src: ["./node_modules/@fontsource-variable/instrument-sans/files/instrument-sans-latin-wght-normal.woff2"],
+            weight: "400 700",
+            style: "normal",
+          },
+        ],
+      },
+    },
+    {
+      provider: fontProviders.local(),
+      name: "Bricolage Grotesque",
+      cssVariable: "--font-display",
+      fallbacks: ["system-ui", "sans-serif"],
+      options: {
+        variants: [
+          {
+            src: ["./node_modules/@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wght-normal.woff2"],
+            weight: "200 800",
+            style: "normal",
+          },
+        ],
+      },
+    },
+    {
+      provider: fontProviders.local(),
+      name: "JetBrains Mono",
+      cssVariable: "--font-mono",
+      fallbacks: ["ui-monospace", "monospace"],
+      options: {
+        variants: [
+          {
+            src: ["./node_modules/@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2"],
+            weight: "100 800",
+            style: "normal",
+          },
+        ],
+      },
+    },
+  ],
   integrations: [
     sitemap({
       // Single-tag pages are noindex (thin, a post or two each), so leave them out.

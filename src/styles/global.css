@@ -9,9 +9,10 @@
   --accent-2: #0d9488;
   --tile: #e3eef6;
   --inline: #e4eef1;
-  --body: "Instrument Sans Variable", system-ui, sans-serif;
-  --display: "Bricolage Grotesque Variable", "Instrument Sans Variable", system-ui, sans-serif;
-  --mono: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* --font-* come from Astro's <Font> (see astro.config.mjs), including the size-matched fallbacks. */
+  --body: var(--font-body);
+  --display: var(--font-display);
+  --mono: var(--font-mono);
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
@@ -160,6 +161,48 @@ img {
   gap: 6px;
 }
 
+/* Page transitions: the browser's own cross-document view transitions, so there's no client router and no
+   scripts to re-run. A post's cover morphs between its list thumbnail and its page (same view-transition-name). */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+.head {
+  view-transition-name: site-head;
+}
+.thumb,
+.cover {
+  view-transition-class: cover;
+}
+::view-transition-old(root) {
+  animation: 140ms ease-out both page-out;
+}
+::view-transition-new(root) {
+  animation: 280ms cubic-bezier(0.2, 0.7, 0.2, 1) 60ms both page-in;
+}
+::view-transition-group(*.cover) {
+  animation-duration: 380ms;
+  animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+/* Thumbnail and cover have different aspect ratios, so crop them mid-morph instead of stretching. */
+::view-transition-old(*.cover),
+::view-transition-new(*.cover) {
+  height: 100%;
+  object-fit: cover;
+}
+@keyframes page-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
 @keyframes rise {
   from {
     opacity: 0;
@@ -196,6 +239,9 @@ img {
   gap: 18px;
   max-width: 760px;
   padding-top: clamp(12px, 5vw, 48px);
+}
+.vt .hero > * {
+  animation: none;
 }
 .hero > * {
   animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
