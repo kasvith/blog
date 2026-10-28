@@ -404,4 +404,4 @@ etc.
 
 You can find the source code to repository [here](https://github.com/kasvith/simplelb/).
 
-Thank you for reading this article :smile:
+Thank you for reading this article 😄

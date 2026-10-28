@@ -1,0 +1,72 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import { BookOpen, Star } from "@lucide/astro";
+import Base from "../../layouts/Base.astro";
+import Brand from "../../components/Brand.astro";
+import { social } from "../../data/brands";
+import { LANG, SITE } from "../../data/site";
+
+export async function getStaticPaths() {
+  const projects = (await getCollection("projects")).sort((a, b) => a.data.order - b.data.order);
+  return projects.map((project, i) => ({ params: { slug: project.id }, props: { project, next: projects[(i + 1) % projects.length] } }));
+}
+
+const { project, next } = Astro.props as { project: CollectionEntry<"projects">; next: CollectionEntry<"projects"> };
+const { repo, lang, stars, site, description } = project.data;
+const { Content } = await render(project);
+const repoUrl = `https://github.com/${repo}`;
+
+const jsonLd = {
+  "@type": "SoftwareSourceCode",
+  name: project.id,
+  description,
+  codeRepository: repoUrl,
+  programmingLanguage: lang,
+  author: { "@type": "Person", name: SITE.name, url: SITE.url },
+};
+---
+
+<Base title={project.id} description={description} image={`/og/projects/${project.id}.png`} jsonLd={jsonLd} active="projects">
+  <article class="page">
+    <header class="page-head">
+      <a class="back" href="/projects/">
+        ← All projects
+      </a>
+      <p class="meta">
+        <span>
+          <i class="dot" style={`background:${LANG[lang]}`} />
+          {lang}
+        </span>
+        <span class="stars">
+          <Star />
+          {stars} on GitHub
+        </span>
+        <span>
+          <Brand path={social.github} />
+          {repo}
+        </span>
+      </p>
+      <h1>{project.id}</h1>
+      <p class="standfirst">{description}</p>
+      <p class="links">
+        <a class="link" href={repoUrl}>
+          <Brand path={social.github} />
+          Source on GitHub
+        </a>
+        {site && (
+          <a class="link" href={site}>
+            <BookOpen />
+            {site.replace(/^https:\/\//, "")}
+          </a>
+        )}
+      </p>
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+    <nav class="next" aria-label="Next project">
+      <span>Next project</span>
+      <a href={`/projects/${next.id}/`}>{next.id} →</a>
+    </nav>
+  </article>
+</Base>

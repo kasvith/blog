@@ -1,0 +1,30 @@
+---
+import { getCollection } from "astro:content";
+import { ArrowRight, Star } from "@lucide/astro";
+import { LANG } from "../data/site";
+
+const projects = (await getCollection("projects")).sort((a, b) => a.data.order - b.data.order);
+---
+
+<div class="cards">
+  {projects.map((p) => (
+    <a class="card" href={`/projects/${p.id}/`}>
+      <span class="org">{p.data.repo.split("/")[0]}</span>
+      <b>{p.id}</b>
+      <span class="desc">{p.data.description}</span>
+      <span class="card-foot">
+        <span>
+          <i class="dot" style={`background:${LANG[p.data.lang]}`} />
+          {p.data.lang}
+        </span>
+        <span class="stars">
+          <Star />
+          {p.data.stars}
+        </span>
+      </span>
+      <span class="arrow">
+        <ArrowRight />
+      </span>
+    </a>
+  ))}
+</div>

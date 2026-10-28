@@ -1,0 +1,143 @@
+---
+import { Image } from "astro:assets";
+import { render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import me from "../../assets/me.jpg";
+import { SITE } from "../../data/site";
+import { fmtDate, getPosts, readingTime, type Post } from "../../lib/posts";
+
+export async function getStaticPaths() {
+  return (await getPosts()).map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props as { post: Post };
+const { title, description, date, lastmod, tags, keywords, cover_image, lang } = post.data;
+const { Content, headings } = await render(post);
+const toc = headings.filter((h) => h.depth === 2);
+// The post's own cover when it has one, else its generated card.
+const card = `/og/posts/${post.id}.png`;
+
+const jsonLd = {
+  "@type": "BlogPosting",
+  headline: title,
+  inLanguage: lang,
+  description,
+  datePublished: date.toISOString(),
+  dateModified: (lastmod ?? date).toISOString(),
+  image: new URL(cover_image?.src ?? card, Astro.site).href,
+  keywords: [...new Set([...tags, ...keywords])].join(", "),
+  mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).href,
+  author: { "@type": "Person", name: SITE.name, alternateName: SITE.handle, url: SITE.url },
+};
+---
+
+<Base
+  title={title}
+  description={description}
+  image={cover_image ?? card}
+  type="article"
+  published={date}
+  modified={lastmod}
+  jsonLd={jsonLd}
+  active="posts"
+>
+  <div class="progress" aria-hidden="true">
+    <span></span>
+  </div>
+  <div class="reader">
+    <article class="page">
+      <header class="page-head">
+        <a class="back" href="/posts/">
+          ← All posts
+        </a>
+        <p class="meta">
+          {tags.map((t) => (
+            <a href={`/tags/${t}/`}>#{t}</a>
+          ))}
+        </p>
+        <h1>{title}</h1>
+        <p class="standfirst">{description}</p>
+        <div class="byline">
+          <Image src={me} alt="" width={40} height={40} />
+          <span>
+            <b>{SITE.name}</b>
+            <span>
+              <time datetime={date.toISOString()}>{fmtDate(date, "long")}</time> · {readingTime(post)} min read
+            </span>
+          </span>
+        </div>
+      </header>
+      {toc.length > 1 && (
+        <details class="toc-inline">
+          <summary>On this page</summary>
+          <ol>
+            {toc.map((h) => (
+              <li>
+                <a href={`#${h.slug}`}>{h.text}</a>
+              </li>
+            ))}
+          </ol>
+        </details>
+      )}
+      {cover_image && (
+        // 2× for high-density screens; Astro skips widths larger than the source.
+        <Image
+          class="cover"
+          src={cover_image}
+          alt={`Cover image for ${title}`}
+          widths={[760, 1520]}
+          sizes="(min-width: 800px) 760px, 100vw"
+          loading="eager"
+        />
+      )}
+      <div class="prose" lang={lang}>
+        <Content />
+      </div>
+    </article>
+    {toc.length > 1 && (
+      <aside class="toc" aria-label="On this page">
+        <p class="toc-title">On this page</p>
+        <ol>
+          {toc.map((h) => (
+            <li>
+              <a href={`#${h.slug}`}>{h.text}</a>
+            </li>
+          ))}
+        </ol>
+      </aside>
+    )}
+  </div>
+</Base>
+
+<script>
+  // Reading progress through the article, and the contents entry for the section being read.
+  const bar = document.querySelector<HTMLElement>(".progress span")!;
+  const prose = document.querySelector<HTMLElement>(".prose")!;
+  const links = [...document.querySelectorAll<HTMLAnchorElement>(".toc a")];
+  const heads = links.map((a) => document.getElementById(decodeURIComponent(a.hash.slice(1))));
+
+  function update() {
+    const r = prose.getBoundingClientRect();
+    bar.style.transform = `scaleX(${Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - innerHeight)))})`;
+    let current = -1;
+    heads.forEach((h, i) => {
+      if (h && h.getBoundingClientRect().top < 140) current = i;
+    });
+    links.forEach((a, i) => a.classList.toggle("is-on", i === current));
+  }
+
+  let ticking = false;
+  addEventListener(
+    "scroll",
+    () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        update();
+      });
+    },
+    { passive: true },
+  );
+  update();
+</script>

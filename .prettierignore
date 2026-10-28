@@ -1,0 +1,7 @@
+# Posts are prose; leave their Markdown exactly as written.
+content/
+public/
+dist/
+.astro/
+pnpm-lock.yaml
+src/data/brands.ts

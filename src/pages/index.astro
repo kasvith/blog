@@ -1,0 +1,135 @@
+---
+import { Image } from "astro:assets";
+import { ArrowRight, AtSign, BookOpen, Code, Mail, MapPin, MessageCircle, PenLine, Sparkles } from "@lucide/astro";
+import Base from "../layouts/Base.astro";
+import Brand from "../components/Brand.astro";
+import JobCards from "../components/JobCards.astro";
+import PostRows from "../components/PostRows.astro";
+import ProjectCards from "../components/ProjectCards.astro";
+import me from "../assets/me.jpg";
+import { social } from "../data/brands";
+import { person, SITE } from "../data/site";
+import { getPosts } from "../lib/posts";
+
+const posts = await getPosts();
+const since = posts.at(-1)?.data.date.getUTCFullYear();
+---
+
+<Base
+  jsonLd={{
+    // WebSite gives Google the site name to show in results.
+    "@graph": [{ "@type": "WebSite", name: SITE.name, alternateName: [SITE.handle, "kasvith.me"], url: `${SITE.url}/` }, person],
+  }}
+>
+  <section class="hero">
+    <Image class="avatar" src={me} alt={SITE.name} width={84} height={84} loading="eager" />
+    <h1>
+      Hi, I'm <span>Kasun Vithanage</span>.
+    </h1>
+    <p class="aka">
+      <span>
+        <AtSign />
+        kasvith around the web
+      </span>
+      <span>
+        <MapPin />
+        Sri Lanka
+      </span>
+    </p>
+    <p class="lede">
+      I'm the co-founder and CTO of{" "}
+      <a class="link" href="https://www.wavezync.com">
+        WaveZync
+      </a>{" "}
+      and{" "}
+      <a class="link" href="https://stoxly.ai">
+        Stoxly.ai
+      </a>
+      . At WaveZync I also lead engineering for{" "}
+      <a class="link" href="https://www.analystbuilder.com">
+        Analyst Builder
+      </a>
+      . I build software in the open and write long, hands-on posts about Elixir, Go, TypeScript and how things work under the hood.
+    </p>
+    <p class="links">
+      <a class="link" href="#posts">
+        <BookOpen />
+        Read my posts
+      </a>
+      <a class="link" href="/projects/">
+        <Code />
+        See my projects
+      </a>
+      <a class="link" href={SITE.github}>
+        <Brand path={social.github} />
+        GitHub
+      </a>
+      <a class="link" href={SITE.twitter}>
+        <Brand path={social.x} />
+        Twitter
+      </a>
+    </p>
+  </section>
+
+  <section class="sec" id="posts">
+    <div class="sec-head">
+      <h2>
+        <span class="badge">
+          <PenLine />
+        </span>
+        Posts
+      </h2>
+      <span>
+        {posts.length} posts since {since}
+      </span>
+    </div>
+    <PostRows posts={posts} />
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <h2>
+        <span class="badge">
+          <Code />
+        </span>
+        Open source
+      </h2>
+      <a href="/projects/">
+        All projects
+        <ArrowRight />
+      </a>
+    </div>
+    <ProjectCards />
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <h2>
+        <span class="badge">
+          <Sparkles />
+        </span>
+        Currently
+      </h2>
+      <span>Where I lead engineering</span>
+    </div>
+    <JobCards />
+  </section>
+
+  <section class="sec" id="contact">
+    <div class="sec-head">
+      <h2>
+        <span class="badge">
+          <MessageCircle />
+        </span>
+        Say hello
+      </h2>
+    </div>
+    <div class="hello">
+      <p>Questions about a post, an idea for a project, consulting, or just want to say hi? Email is the best way to reach me.</p>
+      <a class="btn" href={`mailto:${SITE.email}`}>
+        <Mail />
+        {SITE.email}
+      </a>
+    </div>
+  </section>
+</Base>

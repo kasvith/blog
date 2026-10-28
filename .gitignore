@@ -1,8 +1,8 @@
-*.log
-.cache
-.DS_Store
-src/.temp
 node_modules
 dist
+.astro
+.wrangler
+.DS_Store
+*.log
 .env
 .env.*

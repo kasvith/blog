@@ -1,0 +1,70 @@
+---
+import { ArrowUpRight } from "@lucide/astro";
+import { work } from "../data/site";
+import wz from "../assets/logos/wz-logo.png";
+import sx from "../assets/logos/sx-logo.svg";
+import ab from "../assets/logos/ab-logo.svg";
+
+const logos = { wz, sx, ab };
+const host = (url: string) => url.replace(/^https:\/\/(www\.)?/, "");
+
+// One sine-like path per wave: T repeats the curve, so the path tiles every 200 units and drifts seamlessly.
+const wave = (y: number, amp: number) => {
+  let d = `M0 ${y} Q 50 ${y - amp} 100 ${y}`;
+  for (let x = 200; x <= 800; x += 100) d += ` T ${x} ${y}`;
+  return d;
+};
+const waves = [
+  [96, 16, 0.95, 9],
+  [118, 12, 0.6, 13],
+  [140, 20, 0.4, 17],
+  [160, 10, 0.25, 23],
+];
+const chart = "M0 96 L30 88 L60 92 L90 72 L120 78 L150 56 L180 63 L210 42 L240 48 L270 26 L300 18";
+const bars = [44, 66, 52, 80, 64, 96, 74, 108, 88, 116];
+---
+
+<div class="work">
+  {work.map((w) => (
+    <a class="job" href={w.url}>
+      <div class={`art art-${w.art}`} aria-hidden="true">
+        {w.art === "wz" && (
+          <svg viewBox="0 0 400 176" preserveAspectRatio="xMidYMid slice">
+            {waves.map(([y, a, o, s]) => (
+              <path d={wave(y, a)} stroke-opacity={o} style={`animation-duration:${s}s`} />
+            ))}
+          </svg>
+        )}
+        {w.art === "sx" && (
+          <svg viewBox="0 0 300 120" preserveAspectRatio="none">
+            <path class="sx-area" d={`${chart} L300 120 L0 120 Z`} />
+            <path class="sx-line" d={chart} />
+          </svg>
+        )}
+        {w.art === "ab" && (
+          <svg viewBox="0 0 300 120" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="ab-fill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#00bc7d" stop-opacity="0.75" />
+                <stop offset="1" stop-color="#00bc7d" stop-opacity="0.05" />
+              </linearGradient>
+            </defs>
+            {bars.map((h, i) => (
+              <rect x={6 + i * 30} y={120 - h} width="18" height={h} rx="3" style={`animation-delay:${-i * 0.35}s`} />
+            ))}
+          </svg>
+        )}
+        <img class="brandmark" src={logos[w.art].src} alt="" width="76" height="76" />
+      </div>
+      <span class="job-body">
+        <span class="role">{w.role}</span>
+        <b>{w.name}</b>
+        <span class="desc">{w.desc}</span>
+        <span class="visit">
+          {host(w.url)}
+          <ArrowUpRight />
+        </span>
+      </span>
+    </a>
+  ))}
+</div>

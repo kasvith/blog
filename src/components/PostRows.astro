@@ -1,0 +1,26 @@
+---
+import { Image } from "astro:assets";
+import { fmtDate, type Post } from "../lib/posts";
+
+interface Props {
+  posts: Post[];
+}
+const { posts } = Astro.props;
+---
+
+<ul class="posts">
+  {posts.map((p) => (
+    <li>
+      <a class="row" href={`/posts/${p.id}/`}>
+        <time datetime={p.data.date.toISOString()}>{fmtDate(p.data.date, "short")}</time>
+        <span class="row-text">
+          <b>{p.data.title}</b>
+          <span>{p.data.description}</span>
+        </span>
+        <span class="thumb">
+          {p.data.cover_image ? <Image src={p.data.cover_image} alt="" width={296} /> : <span class="nocover">#{p.data.tags[0]}</span>}
+        </span>
+      </a>
+    </li>
+  ))}
+</ul>

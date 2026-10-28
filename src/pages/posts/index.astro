@@ -1,0 +1,27 @@
+---
+import Base from "../../layouts/Base.astro";
+import PostRows from "../../components/PostRows.astro";
+import { getPosts } from "../../lib/posts";
+
+const posts = await getPosts();
+---
+
+<Base
+  title="Posts"
+  description="Long, hands-on posts by Kasun Vithanage on Elixir, Go, TypeScript and the systems behind real products."
+  active="posts"
+>
+  <section class="listing">
+    <header class="page-head">
+      <h1>Posts</h1>
+      <p class="standfirst">
+        Everything I've written, newest first. You can also{" "}
+        <a class="link" href="/tags/">
+          browse by tag
+        </a>
+        .
+      </p>
+    </header>
+    <PostRows posts={posts} />
+  </section>
+</Base>

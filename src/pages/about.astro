@@ -1,0 +1,168 @@
+---
+import { Image } from "astro:assets";
+import { AtSign, GraduationCap, Mail, MapPin, Milestone, Sparkles, Wrench } from "@lucide/astro";
+import Base from "../layouts/Base.astro";
+import Brand from "../components/Brand.astro";
+import JobCards from "../components/JobCards.astro";
+import me from "../assets/me.jpg";
+import { social, stack } from "../data/brands";
+import { education, past, person, SITE } from "../data/site";
+
+const timelines = [
+  { title: "Before", icon: Milestone, items: past },
+  { title: "Education", icon: GraduationCap, items: education },
+];
+---
+
+<Base
+  title="About"
+  description="Kasun Vithanage (kasvith) is a Computer Engineer from Sri Lanka and co-founder and CTO of WaveZync and Stoxly.ai, working across system design, architecture and DevOps."
+  jsonLd={{ "@type": "ProfilePage", mainEntity: person }}
+  active="about"
+>
+  <article class="about">
+    <header class="about-head">
+      <Image class="avatar" src={me} alt={SITE.name} width={132} height={132} loading="eager" />
+      <div class="about-title">
+        <p class="kicker">About</p>
+        <h1>{SITE.name}</h1>
+        <p class="lede">Computer Engineer and CTO of two startups. I design systems end to end, from architecture to DevOps.</p>
+        <p class="aka">
+          <span>
+            <AtSign />
+            kasvith
+          </span>
+          <span>
+            <MapPin />
+            Matara, Sri Lanka
+          </span>
+        </p>
+      </div>
+    </header>
+
+    <div class="about-copy">
+      <p>
+        I'm a Computer Engineer from Matara, Sri Lanka, with a founder's mindset, and most people online know me as kasvith. I'm the
+        co-founder and CTO of{" "}
+        <a class="link" href="https://www.wavezync.com">
+          WaveZync
+        </a>{" "}
+        and{" "}
+        <a class="link" href="https://stoxly.ai">
+          Stoxly.ai
+        </a>
+        , and at WaveZync I lead engineering for{" "}
+        <a class="link" href="https://www.analystbuilder.com">
+          Analyst Builder
+        </a>
+        , our partnership with Alex Freberg. My strengths are system design and software architecture, and I'm happy across the whole stack,
+        from backend and frontend to infrastructure and DevOps. I'm curious by nature and love a hard problem.
+      </p>
+      <p>
+        Open source is where I started. In 2017 I was a Google Summer of Code student with Joomla!, building the{" "}
+        <a class="link" href="/posts/gsoc-2017-cloud-filesystem-for-joomla-4/">
+          cloud architecture for its new Media Manager
+        </a>
+        , and I mentored GSoC students there for the next two years. These days my open source work is mostly in Elixir, Go and TypeScript,
+        like{" "}
+        <a class="link" href="/projects/durable/">
+          durable
+        </a>{" "}
+        and{" "}
+        <a class="link" href="/projects/htmd/">
+          htmd
+        </a>
+        .
+      </p>
+      <p>
+        I studied Computer Engineering at the University of Peradeniya. I write here about the systems I build and what I learn along the
+        way, and I take on some consulting work too. Away from the keyboard, I'm usually listening to music or watching a movie.
+      </p>
+    </div>
+
+    <section class="sec">
+      <div class="sec-head">
+        <h2>
+          <span class="badge">
+            <Sparkles />
+          </span>
+          Now
+        </h2>
+        <span>Where I lead engineering</span>
+      </div>
+      <JobCards />
+    </section>
+
+    {timelines.map(({ title, icon: Icon, items }) => (
+      <section class="sec">
+        <div class="sec-head">
+          <h2>
+            <span class="badge">
+              <Icon />
+            </span>
+            {title}
+          </h2>
+        </div>
+        <ol class="timeline">
+          {items.map((j) => (
+            <li class="tl-item">
+              <span class="tl-when">{j.when}</span>
+              <span class="tl-what">
+                <b>{j.role}</b> <span class="tl-org">· {j.org}</span>
+                {"note" in j && j.note && <p>{j.note}</p>}
+              </span>
+            </li>
+          ))}
+        </ol>
+      </section>
+    ))}
+
+    <section class="sec">
+      <div class="sec-head">
+        <h2>
+          <span class="badge">
+            <Wrench />
+          </span>
+          What I work with
+        </h2>
+      </div>
+      <p class="chips">
+        {stack.map((s) => (
+          <span class="chip">
+            <Brand path={s.path} color={s.color} />
+            {s.name}
+          </span>
+        ))}
+      </p>
+    </section>
+
+    <section class="sec">
+      <div class="sec-head">
+        <h2>
+          <span class="badge">
+            <AtSign />
+          </span>
+          Elsewhere
+        </h2>
+      </div>
+      <p class="links">
+        <a class="link" href={SITE.github}>
+          <Brand path={social.github} />
+          GitHub
+        </a>
+        <a class="link" href={SITE.twitter}>
+          <Brand path={social.x} />
+          Twitter
+        </a>
+        <a class="link" href={SITE.linkedin}>
+          <Brand path={social.linkedin} />
+          LinkedIn
+        </a>
+      </p>
+      <a class="btn" href={`mailto:${SITE.email}`}>
+        <Mail />
+        {SITE.email}
+      </a>
+    </section>
+  </article>
+</Base>

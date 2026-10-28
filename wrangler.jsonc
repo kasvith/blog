@@ -1,0 +1,12 @@
+// Static site on Cloudflare Workers: `pnpm deploy` builds and uploads ./dist.
+{
+  "name": "kasvith-me",
+  "compatibility_date": "2026-10-01",
+  // Serve the site on the apex domain; the kasvith.me zone must be on this Cloudflare account.
+  "routes": [{ "pattern": "kasvith.me", "custom_domain": true }],
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash",
+  },
+}

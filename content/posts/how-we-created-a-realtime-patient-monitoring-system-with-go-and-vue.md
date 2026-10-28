@@ -219,7 +219,7 @@ Using **Golang** was a brillient idea, we wrote a pretty stable system within fe
 
 Also **VueJS** helped us to create truely reactive nice UIs quickly.
 
-Together We Can :heart:
+Together We Can ❤️
 
 ## Disclaimer
 

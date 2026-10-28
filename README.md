@@ -1,29 +1,22 @@
-# Gridsome Blog Starter
+# kasvith.me
 
-> A simple, hackable & minimalistic starter for Gridsome that uses Markdown for content.
+Personal site and blog of Kasun Vithanage, built with [Astro](https://astro.build) and deployed to Cloudflare Workers as static assets.
 
-## Features
-- Beautiful and simple design.
-- Markdown for content.
-- Tags support.
-- Dark / Light toggle.
-- CSS variables, SCSS & BEM for styling.
-- 100, 100, 100, 100 score on Google Lighthouse.
-- Uses same front-matter fields as Dev.to.
+## Commands
 
-## Demo URL
+```sh
+pnpm install
+pnpm dev       # local dev server
+pnpm build     # static build into dist/
+pnpm preview   # serve dist/ through Wrangler, with _redirects applied
+pnpm check     # astro check (types in .astro files)
+pnpm lint      # oxlint
+pnpm deploy    # build and upload to Cloudflare
+```
 
-https://gridsome-starter-blog.netlify.com
+## Where things live
 
-## Install
-
-### 1. Install Gridsome CLI tool if you don't have
-
-`npm install --global @gridsome/cli`
-
-### 2. Install this starter
-
-1. `gridsome create my-gridsome-site https://github.com/gridsome/gridsome-starter-blog.git`
-2. `cd my-gridsome-site` to open folder
-3. `gridsome develop` to start local dev server at `http://localhost:8080`
-4. Happy coding 🎉🙌
+- `content/posts/*.md`: blog posts. Images sit next to them in `content/posts/images/`, and the file name is the URL (`/posts/<file-name>/`).
+- `src/content/projects/*.md`: open source project pages (`/projects/<name>/`).
+- `src/data/site.ts`: name, links, work, experience and education shown on the home and About pages.
+- `public/`: files served as-is, including `_redirects` for old Gridsome URLs and a `service-worker.js` that removes the old site's service worker from returning visitors.

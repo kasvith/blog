@@ -53,23 +53,23 @@ In addition following things can be noticed
 - Decentralized module system
 - Browser like API
 
-### Secure by default :lock:
+### Secure by default 🔒
 
 Deno provides a sandboxed environment. So when executing any program, you can determine if it can access your network, filesystem or environment variables etc. This means you can execute a script directly from the internet and control how it behaves. Just like a browser.
 
-### Typescript support :rocket:
+### Typescript support 🚀
 
 Javascript is not good when your program scales. Typed languages provide much more insights and even cut half of the errors at compile time rather than in production. Typescript is written for Javascript, with types. Most JS developers love Typescript. 
 
 With Node, you have to transpile Typescript to Javascript using tools. Deno does this for you and even provides fewer boilerplates in your code.
 
-### Single Binary, no dependencies :package:
+### Single Binary, no dependencies 📦
 
 Deno is shipped as a single binary with no dependencies. If you compared to NodeJS comes with tons of shared libraries and other stuff, deno is much simpler. it's about ~14MB. Simple to install and maintain. Even perfect for DevOps environments.
 
 Install Deno [Now](https://deno.land/#installation). It's simple. :100:
 
-### Excellent tooling :hammer:
+### Excellent tooling 🔨
 
 Have you ever worked with language like [Golang](https://go.dev/)? Golang provides an excellent toolset with go command. You can format your code, find potential bugs and there are a ton of things you can do with it. Everyone uses `go fmt`. So the code looks the same everywhere.
 
@@ -79,7 +79,7 @@ Deno solves the issue by providing tooling itself. Yes, no extra tools needed. R
 
 Read more about tooling [here](https://deno.land/manual/tools)
 
-### Standard Library :books:
+### Standard Library 📚
 
 Deno provides a well written standard library. This allows writing programs as you do in a language like Golang. Provides much stuff out of the box so it's up to your imagination.
 
@@ -87,7 +87,7 @@ But the API is not compatible for NodeJS. But there are plans to bring existing 
 
 Checkout standard library [here](https://deno.land/std).
 
-### No NPM :zap:
+### No NPM ⚡
 
 Node's eco-system is built around NPM. A centralized package management system. So if you want to publish a package you have to go through a process to let others use it.
 
@@ -107,7 +107,7 @@ Don't worry, Deno knows to cache them. So you won't download it again.
 
 Also, [Third party packages](https://deno.land/x) can be submitted here to display nicely.
 
-### Browser like API :ok_hand:
+### Browser like API 👌
 
 Deno tries to stay as much as compatible with the browser. You can also have a `window` object like in a browser.
 
@@ -394,7 +394,7 @@ cat file.txt | deno run sgrep.ts --colors=true who
 
 ![sgrep output with colors](./images/deno-first-impression/output-color.png)
 
-Now we have created a small nice grep utility with deno. Hooray. :muscle:
+Now we have created a small nice grep utility with deno. Hooray. 💪
 
 You can find full code [here](https://github.com/kasvith/sgrep).
 
@@ -406,4 +406,4 @@ Visit [deno.land](https://deno.land) today and start exploring this amazing worl
 
 We should thank Ryan Dahl and other contributors for creating this amazing runtime.
 
-Let's deno :fire:
+Let's deno 🔥

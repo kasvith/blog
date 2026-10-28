@@ -9,6 +9,7 @@ tags: ["blogging", "hugo", "gohugo"]
 categories: ["opinions"]
 author: "Kasun Vithanage"
 
+cover_image: ./images/moving-to-my-own-space/featured.png
 ---
 
 I decided to pull off all my blogs to a personal space ⚡️
@@ -17,36 +18,31 @@ I decided to pull off all my blogs to a personal space ⚡️
 
 It's been a while I started blogging. I started from [Blogger](https://www.blogger.com/), [Wordpress](https://wordpress.com/) and finally stopped over [Medium](https://medium.com). It was fine to use these awesome tools. But with the time I felt that moving to my own space is better for blogging.
 
-While these platform provides a great service I wanted more control over my content. I hate ads and stuffs, paywalls and I know you do too. All these contents are writing for free so you need to have access with zero distractions :smile:
+While these platform provides a great service I wanted more control over my content. I hate ads and stuffs, paywalls and I know you do too. All these contents are writing for free so you need to have access with zero distractions 😄
 
 ## What was your next step
 
 Github provides free static site hosting since few years. So I decided to try it out since it gives much more flexibility over my content. Its hosted as plain html/css/js files so there is no dedicated backend for this too. There were several popular static site generators when I decided to move on
 
 - Jekyll - GitHub directly supports hosting jekyll sites, but its based on ruby and doesn't work well in Windows
-- Gatsby - Seems fine but it uses React :smile:
+- Gatsby - Seems fine but it uses React 😄
 - Hugo - Powered by Go, super fast(I mean lightning fast) and very easy to customize(I've a good background in go so its a +1)
 
-So as you can see I've picked up [Hugo](https://gohugo.io/) :heart:
+So as you can see I've picked up [Hugo](https://gohugo.io/) ❤️
 
 Since Hugo is powered by Go I can easily work in Windows too, it is very easy to get it running compared to others I tried. Has bunch of options and really loving it.
 
-These static site generators are using Markdown to write the contents. As a programmer I really love working with Markdown rather than a WYSIWYG :smile:.
+These static site generators are using Markdown to write the contents. As a programmer I really love working with Markdown rather than a WYSIWYG 😄.
 
 Also I can easily add **flowcharts** to my posts like this.
 
-```flow
-st=>start: Start|past:>[blank]
-e=>end: End:>
-op1=>operation: Have a personal blog|current
-op2=>operation: Awesome
-cond=>condition: Yes
-or No?|approved
-c2=>condition: Good idea|rejected
-
-st->op1(right)->cond
-cond(yes, right)->c2
-c2(yes)->op2->e
+```mermaid
+flowchart TD
+  start([Start]) --> blog[Have a personal blog]
+  blog --> choice{Yes or No?}
+  choice -- yes --> idea{Good idea?}
+  idea -- yes --> awesome[Awesome]
+  awesome --> done([End])
 ```
 
 All with simple markdown.
@@ -55,7 +51,7 @@ Editing becomes simple, no databases, content is easy to manage and flexible.
 
 Also no need to have ill syntax highlighters from other previous options, no need to have uncountable **gists** for just an one article.
 
-So there are lot of benefits moving to the personal space giving me :smile:
+So there are lot of benefits moving to the personal space giving me 😄
 
 ## Next steps
 

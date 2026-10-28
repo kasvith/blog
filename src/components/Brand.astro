@@ -1,0 +1,12 @@
+---
+// A Simple Icons brand mark (24x24 path). Without a colour it follows the text colour.
+interface Props {
+  path: string;
+  color?: string | null;
+}
+const { path, color } = Astro.props;
+---
+
+<svg class="brand" viewBox="0 0 24 24" aria-hidden="true" style={color ? `color:${color}` : undefined}>
+  <path d={path} />
+</svg>

@@ -1,0 +1,11 @@
+# Runs on every commit, against the staged files only. Installed by `pnpm install`.
+pre-commit:
+  parallel: true
+  jobs:
+    - name: lint
+      glob: "*.{js,mjs,ts,astro}"
+      run: pnpm exec oxlint {staged_files}
+    - name: format
+      glob: "*.{js,mjs,ts,astro,css,json,jsonc,yml,yaml}"
+      run: pnpm exec prettier --write --ignore-unknown {staged_files}
+      stage_fixed: true
